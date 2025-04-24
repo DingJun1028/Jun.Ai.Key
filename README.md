@@ -4,6 +4,17 @@ type: JunAiKeySystem
 title: ［Jun.Ai.Key ］完美一鍵MVP 產品規格使用指南 (Mistral 版）
 tags: [Boost.Space, API, Mvp最小可行性, Jun.Ai.Key., Prd產品需求文件, Ai人工智慧]
 ---
+# Jun.Ai.Key 設計歷程
+
+歡迎瀏覽 Jun.Ai.Key 的設計歷程和相關文檔。
+
+## 設計文檔
+- [系統結構設計](https://github.com/DingJun1028/Jun.Ai.Key/wiki/系統結構設計)
+- [功能細節](https://github.com/DingJun1028/Jun.Ai.Key/wiki/功能細節)
+- [API 整合](https://github.com/DingJun1028/Jun.Ai.Key/wiki/API-整合)
+
+## 開發計畫
+- [開發看板](https://github.com/DingJun1028/Jun.Ai.Key/projects)
 
 [https://chat.mistral.ai/chat/74f59d8f-2909-432b-bc0b-44f61d9fa8c6](https://chat.mistral.ai/chat/74f59d8f-2909-432b-bc0b-44f61d9fa8c6)
 
