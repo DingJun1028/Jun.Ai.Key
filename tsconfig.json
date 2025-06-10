@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2016",
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "module": "commonjs",
     "baseUrl": "./src",
     "paths": {
@@ -16,6 +16,13 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "inlineSourceMap": false,
-    "outDir": "dist"
+    "outDir": "dist",
+    "typeRoots": [
+      "./dts",
+      "./node_modules/@types"
+    ],
+    "types": [
+      "scripting"
+    ]
   }
 }

@@ -13,9 +13,6 @@ export type ChartAxisScaleType = 'linear' | 'log' | 'category' | 'dateTime';
 // ChartSymbolShape
 export type ChartSymbolShape = 'circle' | 'square' | 'triangle' | 'diamond' | 'star' | 'cross' | 'plus';
 
-// AxisSet 僅保留一份
-type AxisSet = 'vertical' | 'horizontal' | 'all';
-
 // ChartSelection
 export type ChartSelection = number | string | Date | [number, number] | [string, string] | [Date, Date];
 
@@ -546,6 +543,11 @@ declare global {
     const Fragment: FunctionComponent<any>;
 }
 
+// 型別補強：宣告常用 UI 元件（VStack, Text, Button）
+declare const VStack: FunctionComponent<any>;
+declare const Text: FunctionComponent<any>;
+declare const Button: FunctionComponent<any>;
+
 type AnimatedFramesProps = {
     /**
      * The animation duration, in seconds.
@@ -649,10 +651,6 @@ type ContentMode = 'fit' | 'fill';
  * The horizontal or vertical dimension in a 2D coordinate system.
  */
 type Axis = 'vertical' | 'horizontal';
-/**
- * An efficient set of axes.
- */
-type AxisSet = 'vertical' | 'horizontal' | 'all';
 type ColorScheme = 'light' | 'dark';
 type Visibility = 'automatic' | 'hidden' | 'visible';
 /**
@@ -928,4 +926,24 @@ declare namespace Script {
     remove(key: string): Promise<void>;
   };
   function render(node: VirtualNode): void;
+}
+
+// 型別補強：讓 Scripting App 的 JSX 組件型別與 VirtualNode 相容
+// 讓 <VStack>、<Text>、<Button> 等回傳 VirtualNode 型別
+
+// =============================
+// ⚠️【Scripting App JSX 型別專用】⚠️
+// 本型別檔僅供 Scripting App/手機端專用，勿與 React/React Native 混用。
+// 讓 <VStack>、<Text>、<Button> 等 JSX 組件型別與 VirtualNode 完全相容。
+
+declare namespace JSX {
+  type Element = VirtualNode;
+  interface ElementClass { render: any; }
+  interface ElementAttributesProperty { props: {}; }
+  interface IntrinsicElements {
+    VStack: any;
+    Text: any;
+    Button: any;
+    // ...可擴充更多 Scripting App 組件
+  }
 }
