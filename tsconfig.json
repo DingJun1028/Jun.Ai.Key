@@ -2,6 +2,17 @@
   "compilerOptions": {
     "target": "es2016",
     "jsx": "react-jsx",
-    "module": "commonjs"
+    "module": "commonjs",
+    "baseUrl": "./src",
+    "paths": {
+      "*": ["*"],
+      "@/*": ["*"],
+      "agents/*": ["agents/*"],
+      "services/*": ["services/*"],
+      "models/*": ["models/*"],
+      "components/*": ["components/*"],
+      "hooks/*": ["hooks/*"]
+    },
+    "esModuleInterop": true
   }
 }
