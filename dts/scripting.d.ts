@@ -13,6 +13,12 @@ export type ChartAxisScaleType = 'linear' | 'log' | 'category' | 'dateTime';
 // ChartSymbolShape
 export type ChartSymbolShape = 'circle' | 'square' | 'triangle' | 'diamond' | 'star' | 'cross' | 'plus';
 
+<<<<<<< HEAD
+=======
+// AxisSet 僅保留一份
+type AxisSet = 'vertical' | 'horizontal' | 'all';
+
+>>>>>>> 8a76be0 (feat: Implement OmniWisdomAgent and OmniKeyCoreAgent with message handling and routing logic)
 // ChartSelection
 export type ChartSelection = number | string | Date | [number, number] | [string, string] | [Date, Date];
 
@@ -543,11 +549,14 @@ declare global {
     const Fragment: FunctionComponent<any>;
 }
 
+<<<<<<< HEAD
 // 型別補強：宣告常用 UI 元件（VStack, Text, Button）
 declare const VStack: FunctionComponent<any>;
 declare const Text: FunctionComponent<any>;
 declare const Button: FunctionComponent<any>;
 
+=======
+>>>>>>> 8a76be0 (feat: Implement OmniWisdomAgent and OmniKeyCoreAgent with message handling and routing logic)
 type AnimatedFramesProps = {
     /**
      * The animation duration, in seconds.
@@ -651,6 +660,13 @@ type ContentMode = 'fit' | 'fill';
  * The horizontal or vertical dimension in a 2D coordinate system.
  */
 type Axis = 'vertical' | 'horizontal';
+<<<<<<< HEAD
+=======
+/**
+ * An efficient set of axes.
+ */
+type AxisSet = 'vertical' | 'horizontal' | 'all';
+>>>>>>> 8a76be0 (feat: Implement OmniWisdomAgent and OmniKeyCoreAgent with message handling and routing logic)
 type ColorScheme = 'light' | 'dark';
 type Visibility = 'automatic' | 'hidden' | 'visible';
 /**
@@ -927,6 +943,7 @@ declare namespace Script {
   };
   function render(node: VirtualNode): void;
 }
+<<<<<<< HEAD
 
 // 型別補強：讓 Scripting App 的 JSX 組件型別與 VirtualNode 相容
 // 讓 <VStack>、<Text>、<Button> 等回傳 VirtualNode 型別
@@ -947,3 +964,5 @@ declare namespace JSX {
     // ...可擴充更多 Scripting App 組件
   }
 }
+=======
+>>>>>>> 8a76be0 (feat: Implement OmniWisdomAgent and OmniKeyCoreAgent with message handling and routing logic)

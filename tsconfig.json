@@ -16,6 +16,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "inlineSourceMap": false,
+<<<<<<< HEAD
     "outDir": "dist",
     "typeRoots": [
       "./dts",
@@ -24,5 +25,8 @@
     "types": [
       "scripting"
     ]
+=======
+    "outDir": "dist"
+>>>>>>> 8a76be0 (feat: Implement OmniWisdomAgent and OmniKeyCoreAgent with message handling and routing logic)
   }
 }
