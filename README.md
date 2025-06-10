@@ -7,6 +7,7 @@
 
 ---
 
+<<<<<<< HEAD
 ## 目錄
 
 - [專案願景與定位](#專案願景與定位)
@@ -18,6 +19,13 @@
 - [商業化路徑](#商業化路徑)
 - [驗證指標](#驗證指標)
 - [版本資訊](#版本資訊)
+=======
+# Jun.Ai.Key # 智慧沉澱奧義
+
+> 本專案為「Jun.Ai.Key 萬能元鑰」整合版，支援一鍵啟動、Supabase 同步、完整 API 文件庫，以及一鍵部署至 GitHub Pages 和 Supabase Edge Functions。
+> 
+> **智慧沉澱奧義**：讓知識、流程、API、團隊經驗自動沉澱、整合與再利用，實現 AI 驅動的高效協作與持續進化。
+>>>>>>> 37a4abb (Updates scripts submodule to latest commit)
 
 ---
 
