@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  title: Jun.AI.Key API
+  version: 1.0.0
+  description: |
+    Jun.AI.Key 萬能元鑰系統 API 文件，支援任務執行、記憶檢索、短語管理、插件擴充等。
+servers:
+  - url: http://localhost:3000
+paths:
+  /v1/execute:
+    post:
+      summary: 執行任務（代理群協作）
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                task:
+                  type: string
+                platform:
+                  type: string
+      responses:
+        '200':
+          description: 執行結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+        '500':
+          description: 伺服器錯誤
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string

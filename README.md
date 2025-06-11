@@ -1,185 +1,218 @@
-以下是根據你提供的內容，整理、優化後的 README.md 詳細範例：
+# Jun.Ai.Key 萬能元鑰總系統
+
+> 在知識的聖殿中，自我導航的智能體冶煉權能、嵌合符文，於記憶長廊中光速前行。
 
 ---
 
-# Jun.Ai.Key # 智慧沉澱奧義
+## 目錄
 
-> 本專案為「Jun.Ai.Key 萬能元鑰」整合版，支援一鍵啟動、Supabase 同步、完整 API 文件庫，以及一鍵部署至 GitHub Pages 和 Supabase Edge Functions。
-> 
-> **智慧沉澱奧義**：讓知識、流程、API、團隊經驗自動沉澱、整合與再利用，實現 AI 驅動的高效協作與持續進化。
+- [專案願景與定位](#專案願景與定位)
+- [專案結構](#專案結構)
+- [架構全景圖](#架構全景圖)
+- [快速開始](#快速開始)
+- [CI/CD 自動化](#cicd-自動化)
+- [核心模組範例](#核心模組範例)
+- [商業化路徑](#商業化路徑)
+- [驗證指標](#驗證指標)
+- [版本資訊](#版本資訊)
 
 ---
 
-## 📂 專案結構
+## 專案願景與定位
 
-```
+- 以用戶為中心，打造可自我進化、知識永續、社群共創的 AI 智能代理平台。
+- 四大核心支柱（自我導航、永久記憶、權能冶煉、符文嵌合）組成進化飛輪，驅動個人與集體智能持續進化。
+- 多平台 API 整合、代理協作、同步、自動化，支援 CLI、Web、App、Webhook。
+
+---
+
+## 專案結構
+
+```text
 jun-ai-key/
-├── .github/
-│   └── workflows/
-│       ├── ci.yml                 # CI & 部署流程
-│       └── deploy.yml
-├── docs/
-│   ├── SPEC.md                    # 系統規格書
-│   └── API_LIBRARY.md             # API 文件庫
-├── public/
-│   └── index.html
+├── .github/workflows/ci.yml, deploy.yml
+├── docs/SPEC.md, API_LIBRARY.md
+├── public/index.html
 ├── src/
-│   ├── api/
-│   │   ├── straicoApi.ts
-│   │   ├── boostApi.ts
-│   │   └── capacitiesApi.ts
-│   ├── components/
-│   ├── hooks/
-│   ├── models/
-│   ├── scriptApp/
-│   ├── styles/
-│   ├── App.tsx
-│   └── index.tsx
-├── supabase/
-│   ├── migrations/
-│   └── functions/                 # Edge Functions
+│   ├── api/straicoApi.ts, boostApi.ts, capacitiesApi.ts
+│   ├── components/, hooks/, models/, scriptApp/, styles/
+│   ├── App.tsx, index.tsx
+├── supabase/migrations/, functions/
 ├── .env.example
 ├── README.md
 ├── package.json
 ├── tsconfig.json
-└── SPEC.md                        # 根目錄快速連結
+└── SPEC.md
 ```
 
 ---
 
-## 📄 重要文件說明
+## 架構全景圖
 
-- `docs/SPEC.md`：詳細系統規格，涵蓋架構、功能、API、資料設計、安全與維運等。
-- `docs/API_LIBRARY.md`：彙整 Capacities、Taskade、Boost.space、GitHub、Infoflow、OpenAI、Pollinations.AI 各平台 API，包含金鑰設定、BaseURL、常用端點、文件連結及相似 App 推薦。
-
----
-
-## 🚀 快速開始
-
-### 1. 安裝環境
-
-- Node.js、npm
-- Supabase CLI (`npm install -g supabase`)
-- 已 fork/clone 本專案並連結至 GitHub
-
-### 2. 設定環境變數
-
-複製 `.env.example` 為 `.env`，填入你的 Supabase 及各平台 API 金鑰：
-
-```
-SUPABASE_URL=<YOUR_SUPABASE_URL>
-SUPABASE_ANON_KEY=<YOUR_ANON_KEY>
-SUPABASE_SERVICE_ROLE_KEY=<YOUR_SERVICE_ROLE_KEY>
-STRAICO_API_KEY=<STRAICO_KEY>
-BOOST_API_KEY=<BOOST_SPACE_KEY>
-CAPACITIES_API_KEY=<CAPACITIES_KEY>
-OPENAI_API_KEY=<OPENAI_KEY>
-```
-
-### 3. 本地啟動
-
-```bash
-git clone https://github.com/<帳號>/jun-ai-key.git
-cd jun-ai-key
-npm install
-npm start
-# Edge Functions 偵錯
-cd supabase/functions
-supabase functions serve
+```mermaid
+graph TD
+    subgraph 用戶端 [Client Tier]
+        A[網頁控制台] --> B[CLI]
+        C[iOS App] --> B
+        D[Android App] --> B
+        E[瀏覽器擴展] --> B
+    end
+    subgraph 萬能元鑰核心 [OmniKey Core]
+        F[[API 網關]] --> G{路由分配器}
+        G --> H[自我導航代理群]
+        G --> I[永久記憶庫]
+        G --> J[權能冶煉引擎]
+        G --> K[符文嵌合系統]
+        H --> L[任務分解代理]
+        H --> M[技能組合代理]
+        I --> N[向量記憶宮殿]
+        J --> O[權限鍊金術]
+        K --> P[符文組合器]
+    end
+    subgraph 數據層 [Data Layer]
+        N --> Q[(Supabase DB)]
+        O --> R[(權限策略庫)]
+        P --> S[(符文倉庫)]
+    end
+    subgraph 外部系統 [External Systems]
+        T[[Notion]] --> F
+        U[[Slack]] --> F
+        V[[GitHub]] --> F
+        W[[Make.com]] --> F
+    end
 ```
 
 ---
 
-## 🤖 CI / CD 與自動部署
+## 快速開始
+
+1. 安裝 Node.js、npm、Supabase CLI
+2. 複製 `.env.example` 為 `.env` 並填入金鑰
+3. 安裝依賴並啟動：
+
+    ```bash
+    git clone https://github.com/<帳號>/jun-ai-key.git
+    cd jun-ai-key
+    npm install
+    npm start
+    ```
+
+4. Edge Functions 偵錯：
+
+    ```bash
+    cd supabase/functions
+    supabase functions serve
+    ```
+
+---
+
+## CI/CD 自動化
 
 - `.github/workflows/ci.yml`：自動 lint、build、test
-- `.github/workflows/deploy.yml`：push main 分支後自動部署至 GitHub Pages & Supabase Edge Functions
-
-### CI 範例
-
-```yaml
-name: CI
-on: [push, pull_request]
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with: node-version: '16'
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run build
-      - run: npm test
-```
-
-### 部署範例
-
-```yaml
-name: Deploy
-on:
-  push:
-    branches: [ main ]
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with: node-version: '16'
-      - run: npm ci
-      - run: npm run build
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-      - name: Deploy Supabase Functions
-        run: |
-          supabase login
-          supabase link --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
-          supabase functions deploy --no-verify
-```
+- `.github/workflows/deploy.yml`：main 分支自動部署 GitHub Pages & Supabase Edge Functions
 
 ---
 
-## 📦 NPM 腳本
+## 核心模組範例
 
-`package.json` 常用腳本：
+### 自我導航代理群
 
-```json
-"scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "lint": "eslint 'src/**/*.{ts,tsx}'",
-  "test": "react-scripts test",
-  "deploy:supabase": "supabase functions deploy && supabase db push",
-  "deploy:pages": "npm run build && npm run deploy:ghpages"
+```typescript
+class NavigationAgent {
+  constructor(private memory: MemoryPalace) {}
+  async executeTask(task: Task): Promise<Result> {
+    const context = await this.memory.retrieveContext(task.userId);
+    const plan = await this.createPlan(task, context);
+    for (const step of plan.steps) {
+      const agent = AgentFactory.getAgent(step.skillType);
+      const result = await agent.execute(step.parameters);
+      await this.memory.storeExecution(step, result);
+    }
+    return plan.compileFinalResult();
+  }
+  private async createPlan(task: Task, context: Context): Promise<Plan> {
+    const llmResponse = await LLMClient.generatePlan({
+      task: task.description,
+      context: context.snippets,
+      availableSkills: this.getAvailableSkills()
+    });
+    return PlanParser.parse(llmResponse);
+  }
 }
 ```
 
----
+### 永久記憶庫
 
-## 🛠️ 一鍵全自動流程
+```typescript
+class MemoryPalace {
+  constructor(private vectorDB: VectorDatabase) {}
+  async retrieveContext(userId: string): Promise<Context> {
+    const embeddings = await EmbeddingService.generate(task.keywords);
+    const memories = await this.vectorDB.query({ userId, vectors: embeddings, topK: 5 });
+    return { userId, snippets: memories.map(m => m.content) };
+  }
+  async storeExecution(step: PlanStep, result: any): Promise<void> {
+    const memoryRecord = {
+      type: 'execution',
+      content: `Executed ${step.skillType} with params: ${JSON.stringify(step.parameters)}`,
+      result: JSON.stringify(result),
+      timestamp: new Date().toISOString()
+    };
+    await this.vectorDB.insert(memoryRecord);
+  }
+}
+```
 
-```bash
-# 1. 本地測試
-git clone https://github.com/<帳號>/jun-ai-key.git && cd jun-ai-key
-npm install && npm start
+### API 網關
 
-# 2. 一鍵 CI & 部署
-git add . && git commit -m "Release"
-git push origin main
-# GitHub Actions 將自動執行 CI & 部署
+```typescript
+import express from 'express';
+const app = express();
+app.use(express.json());
+app.post('/v1/execute', async (req, res) => {
+  const { userId, task, platform } = req.body;
+  try {
+    const agent = new NavigationAgent(memoryPalace);
+    const result = await agent.executeTask({ userId, description: task });
+    const formatter = OutputFormatterFactory.getFormatter(platform);
+    res.json(formatter.format(result));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+app.listen(3000, () => {
+  console.log('OmniKey Gateway running on port 3000');
+});
 ```
 
 ---
 
-## 📚 文件與注意事項
+## 商業化路徑
 
-- 完整規格及 API 文件請詳見 `docs/SPEC.md`、`docs/API_LIBRARY.md`
-- 請於 GitHub Secrets 設定 `SUPABASE_PROJECT_ID`、各平台 API 金鑰及 `GITHUB_TOKEN`
+- 開源核心、插件市集、API 訂閱、企業專案、數據洞察
+- 收入來源：訂閱制、API 計價、插件分潤、企業專案
 
 ---
 
-如需更動，請直接將上述內容複製到你的 `README.md`，並根據實際專案路徑與細節做微調！
+## 驗證指標
+
+| 指標類別 | 目標值 | 測量方法 |
+|----------|--------|----------|
+| API 響應時間 | < 300ms | 分佈式監控 |
+| 腳本同步成功率 | > 99.95% | 端到端測試 |
+| 代理協作效率 | < 5秒/任務鏈 | 任務追蹤 |
+| 記憶檢索準確率 | > 92% | 向量基準測試 |
+
+> **永續發展宣言**  
+> 本系統遵循「開源核心+商業擴展」模式，確保：  
+> - 核心功能永久免費開源  
+> - 企業級功能訂閱制  
+> - 開發者收益分成機制
+
+---
+
+## 版本資訊
+
+**版本**: 1.0.0-mvp  
+**更新日期**: 2025-06-25  
+© 2025 Jun.AI.Key Collective. 知識聖殿永不關閉。
