@@ -1,0 +1,17 @@
+body {
+  background: #fff;
+  color: #222;
+}
+
+.app-container {
+  background: #f7f7f7;
+  color: #222;
+}
+
+button, input, select, textarea {
+  background: #fff;
+  color: #222;
+  border: 1px solid #ccc;
+}
+
+/* 可根據實際 UI 框架再擴充 */
