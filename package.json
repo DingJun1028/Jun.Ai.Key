@@ -1,0 +1,38 @@
+{
+  "name": "junaikey",
+  "version": "1.0.0",
+  "description": "這是一個基本的 Python 專案範例，包含一個簡單的 Hello World 程式。",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx webpack serve --mode development --open",
+    "build": "npx webpack --mode production",
+    "lint": "eslint 'src/**/*.{ts,tsx}' && markdownlint .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy:supabase": "supabase functions deploy && supabase db push",
+    "deploy:pages": "npm run build && npm run deploy:ghpages",
+    "changelog": "node scripts/generate-changelog.js",
+    "rebase:main": "pwsh scripts/git-rebase-main.ps1",
+    "update:readme-version": "node scripts/update-readme-version.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "eslint": "^9.28.0",
+    "html-webpack-plugin": "^5.6.3",
+    "ts-loader": "^9.5.2",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2",
+    "markdownlint-cli": "^0.39.0",
+    "simple-git": "^3.21.0",
+    "conventional-changelog-cli": "^4.1.0"
+  }
+}
