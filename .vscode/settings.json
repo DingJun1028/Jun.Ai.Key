@@ -1,4 +1,8 @@
 {
   "typescript.format.semicolons": "remove",
   "typescript.preferences.jsxAttributeCompletionStyle": "braces",
+<<<<<<< HEAD
+=======
+  "workspace.name": "JunAIKey 萬能元鑰 總系統"
+>>>>>>> 6ab95a8f1787585ee90264281a796a474d0c340b
 }

@@ -1,1 +1,21 @@
-node_modules
+# Node.js 相關
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript 編譯產物
+dist/
+build/
+*.tsbuildinfo
+
+# VSCode 設定
+.vscode/
+
+# 環境變數
+.env
+.env.*
+
+# 作業系統產生檔案
+.DS_Store
+Thumbs.db
