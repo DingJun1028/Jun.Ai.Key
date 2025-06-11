@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-=======
 {
   "name": "junaikey",
   "version": "1.0.0",
-  "description": "這是一個基本的 Python 專案範例，包含一個簡單的 Hello World 程式。",
+  "description": "Jun.AI.Key 萬能元鑰系統，AI 智能代理平台，支援自我導航、永久記憶、權能冶煉、符文嵌合等核心模組。",
   "main": "index.js",
   "scripts": {
     "start": "npx webpack serve --mode development --open",
@@ -11,11 +9,12 @@
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy:supabase": "supabase functions deploy && supabase db push",
-    "deploy:pages": "npm run build && npm run deploy:ghpages"
+    "deploy:pages": "npm run build && npm run deploy:ghpages",
+    "rebase:main": "pwsh scripts/git-rebase-main.ps1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["AI", "agent", "typescript", "supabase", "automation", "knowledge", "memory", "navigation"],
+  "author": "Jun.AI.Key Collective",
+  "license": "MIT",
   "dependencies": {
     "@supabase/supabase-js": "^2.50.0",
     "@types/react": "^19.1.6",
@@ -47,4 +46,3 @@
     "webpack-dev-server": "^5.2.2"
   }
 }
->>>>>>> 57c9216 (WIP: 本地變更暫存，準備 rebase)

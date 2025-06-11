@@ -1,13 +1,9 @@
-# Jun.AI.Key 萬能元鑰系統 / Jun.Ai.Key 萬能元鑰總系統
+# Jun.Ai.Key 萬能元鑰總系統
 
-> 知識的聖殿中，自我導航的智能體永不停歇地冶煉權能、嵌合符文，在記憶的長廊中光速前行。
-> In the sanctum of knowledge, self-navigating agents perpetually forge authorities and engraft runes, advancing at light speed through the corridors of memory。
-> 
 > 在知識的聖殿中，自我導航的智能體冶煉權能、嵌合符文，於記憶長廊中光速前行。
 
 ---
 
-<<<<<<< HEAD
 ## 目錄
 
 - [專案願景與定位](#專案願景與定位)
@@ -19,13 +15,6 @@
 - [商業化路徑](#商業化路徑)
 - [驗證指標](#驗證指標)
 - [版本資訊](#版本資訊)
-=======
-# Jun.Ai.Key # 智慧沉澱奧義
-
-> 本專案為「Jun.Ai.Key 萬能元鑰」整合版，支援一鍵啟動、Supabase 同步、完整 API 文件庫，以及一鍵部署至 GitHub Pages 和 Supabase Edge Functions。
-> 
-> **智慧沉澱奧義**：讓知識、流程、API、團隊經驗自動沉澱、整合與再利用，實現 AI 驅動的高效協作與持續進化。
->>>>>>> 37a4abb (Updates scripts submodule to latest commit)
 
 ---
 
@@ -59,7 +48,7 @@ jun-ai-key/
 
 ---
 
-## 架構全景圖 | Architecture Panorama
+## 架構全景圖
 
 ```mermaid
 graph TD
@@ -132,7 +121,6 @@ graph TD
 ```typescript
 class NavigationAgent {
   constructor(private memory: MemoryPalace) {}
-  
   async executeTask(task: Task): Promise<Result> {
     const context = await this.memory.retrieveContext(task.userId);
     const plan = await this.createPlan(task, context);
@@ -159,7 +147,6 @@ class NavigationAgent {
 ```typescript
 class MemoryPalace {
   constructor(private vectorDB: VectorDatabase) {}
-  
   async retrieveContext(userId: string): Promise<Context> {
     const embeddings = await EmbeddingService.generate(task.keywords);
     const memories = await this.vectorDB.query({ userId, vectors: embeddings, topK: 5 });
@@ -225,29 +212,8 @@ app.listen(3000, () => {
 
 ---
 
-## All Promises
+## 版本資訊
 
-### Promise 1: 用戶意圖自動規劃
-- 代理群（OmniKey Agent Swarm）會根據用戶每一次互動，主動解析意圖，規劃跨圈層的知識、任務、資料流。
-- 所有規劃過程皆以 TypeScript 類型安全與可追蹤性為基礎。
-
-### Promise 2: 圈層協調與同步
-- 各圈層（知識、任務、資料）自動協調，確保資料一致性與即時同步。
-- 任務與知識的流轉皆以 Promise-based 非同步流程實現，保證高效與可擴展。
-
-### Promise 3: 統一記錄與長期知識圖譜
-- 所有圈層的互動、任務、知識自動統一記錄，形成可查詢、可追溯的知識圖譜。
-- 支援跨平台（Web、App、CLI、API）一致的資料結構與查詢介面。
-
-### Promise 4: 開發者與用戶雙向賦能
-- 開發者可擴充任務代理、知識圈層、資料連接器，所有擴充皆以 TypeScript 型別與 Promise 標準實作。
-- 用戶可自定義自動化規則，所有自動化皆以 Promise 流程鏈串接。
-
-### Promise 5: 永續開源與商業共榮
-- 核心功能永久開源，所有 API/模組皆以 TypeScript Promise 標準設計，易於審查與二次開發。
-- 企業級功能與資料安全以訂閱制提供，開發者可參與收益分成。
-
----
-**版本**: 1.0.2  
-**更新日期**: 2025-06-12  
+**版本**: 1.0.0-mvp  
+**更新日期**: 2025-06-25  
 © 2025 Jun.AI.Key Collective. 知識聖殿永不關閉。
