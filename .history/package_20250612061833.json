@@ -10,8 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy:supabase": "supabase functions deploy && supabase db push",
     "deploy:pages": "npm run build && npm run deploy:ghpages",
-    "rebase:main": "pwsh scripts/git-rebase-main.ps1",
-    "ci-all": "npm run lint && npm run build && npm test && npm run deploy:pages && npm run deploy:supabase"
+    "rebase:main": "pwsh scripts/git-rebase-main.ps1"
   },
   "keywords": ["AI", "agent", "typescript", "supabase", "automation", "knowledge", "memory", "navigation"],
   "author": "Jun.AI.Key Collective",
