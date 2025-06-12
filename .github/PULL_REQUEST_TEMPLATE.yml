@@ -1,0 +1,31 @@
+name: Pull Request
+about: 提交程式碼變更
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 請詳述本次 PR 內容
+  - type: textarea
+    id: description
+    attributes:
+      label: 變更說明
+      description: 請簡要說明本次 PR 的內容與動機。
+      placeholder: 請輸入內容...
+    validations:
+      required: true
+  - type: textarea
+    id: test
+    attributes:
+      label: 測試方式
+      description: 請說明如何驗證本次變更。
+      placeholder: 1. ...\n2. ...
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: PR 檢查清單
+      options:
+        - label: 已通過本地 lint/build/test
+        - label: 變更已更新文件/註解
+        - label: 無敏感資訊洩漏

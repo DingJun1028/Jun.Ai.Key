@@ -1,0 +1,31 @@
+name: Issue
+about: 回報錯誤或提出功能需求
+labels: ['bug', 'feature']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 請詳細描述您的問題或需求
+  - type: textarea
+    id: description
+    attributes:
+      label: 問題/需求描述
+      description: 請清楚描述遇到的問題或希望新增的功能。
+      placeholder: 請輸入內容...
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 重現步驟/建議方案
+      description: 請提供重現問題的步驟或您的建議解決方案。
+      placeholder: 1. ...\n2. ...
+    validations:
+      required: false
+  - type: input
+    id: contact
+    attributes:
+      label: 聯絡方式（選填）
+      description: 如需回覆請留下 Email 或其他聯絡方式。
+    validations:
+      required: false
