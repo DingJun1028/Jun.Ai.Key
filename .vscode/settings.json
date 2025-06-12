@@ -1,5 +1,9 @@
 {
   "typescript.format.semicolons": "remove",
   "typescript.preferences.jsxAttributeCompletionStyle": "braces",
-  "workspace.name": "JunAIKey 萬能元鑰 總系統"
+  "workspace.name": "JunAIKey 萬能元鑰 總系統",
+  "git.autoRepositoryDetection": false,
+  "workbench.notifications.showErrors": false,
+  "workbench.notifications.showWarnings": false,
+  "workbench.notifications.showInfo": false
 }
