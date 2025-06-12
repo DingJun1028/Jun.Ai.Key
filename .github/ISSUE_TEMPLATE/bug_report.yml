@@ -1,0 +1,29 @@
+---
+name: Bug Report
+description: 回報程式錯誤或異常行為
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 發生了什麼問題？
+      description: 請詳細描述錯誤現象與重現步驟
+      placeholder: 輸入錯誤細節與重現方式
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 預期行為
+      description: 請描述正確應有的行為
+      placeholder: 輸入預期結果
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 執行環境
+      description: 請提供作業系統、瀏覽器、Node.js 版本等資訊
+      placeholder: 例如：Windows 11, Node.js 20.x
+    validations:
+      required: false

@@ -1,0 +1,21 @@
+---
+name: Feature Request
+description: 建議新功能或改進
+labels: [enhancement]
+body:
+  - type: textarea
+    id: feature
+    attributes:
+      label: 功能描述
+      description: 請詳細描述您希望新增或改進的功能
+      placeholder: 輸入功能細節
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: 動機與價值
+      description: 為什麼需要這個功能？有什麼實際應用場景？
+      placeholder: 輸入動機與應用場景
+    validations:
+      required: true
