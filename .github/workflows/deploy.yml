@@ -30,7 +30,11 @@ jobs:
     needs: deploy-pages
     steps:
       - uses: actions/checkout@v4
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - name: Install Supabase CLI
+        run: npm install -g supabase
       - name: Deploy to Supabase Edge Functions
-        run: |
-          npm install -g supabase
-          supabase functions deploy --project-ref ${{ secrets.SUPABASE_PROJECT_REF }} --token ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: supabase functions deploy --project-ref ${{ secrets.SUPABASE_PROJECT_REF }} --token ${{ secrets.SUPABASE_ACCESS_TOKEN }}

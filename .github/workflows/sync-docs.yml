@@ -1,0 +1,22 @@
+# 自動同步 docs 與 README
+
+name: Sync Docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  sync-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - name: 檢查 README 與 docs 一致性
+        run: |
+          diff README.md docs/CONTRIBUTING.md || echo "README 與 docs/CONTRIBUTING.md 有差異，請同步內容。"
