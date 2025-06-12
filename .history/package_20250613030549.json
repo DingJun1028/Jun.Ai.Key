@@ -1,0 +1,40 @@
+{
+  "name": "jun-ai-key",
+  "version": "1.0.0-mvp",
+  "description": "Jun.Ai.Key 萬能元鑰總系統 - 以用戶為中心的 AI 智能代理平台",
+  "main": "src/index.tsx",
+  "scripts": {
+    "start": "node ./src/index.tsx",
+    "dev": "nodemon ./src/index.tsx",
+    "build": "tsc",
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DingJun1028/Jun.Ai.Key.git"
+  },
+  "keywords": [
+    "AI",
+    "Agent",
+    "Supabase",
+    "TypeScript",
+    "Node.js",
+    "OmniKey"
+  ],
+  "author": "Jun.AI.Key Collective",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "supabase": "^2.39.7"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.30",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "typescript": "^5.4.5"
+  }
+}
