@@ -3,14 +3,14 @@
  * 用於創建與管理符文物件。
  */
 export interface Rune {
-  id: string;
-  name: string;
-  effect: string;
-  engravedAt: string;
+  id: string
+  name: string
+  effect: string
+  engravedAt: string
 }
 
 export class RuneEngravingSystem {
-  private runes: Rune[] = [];
+  private runes: Rune[] = []
 
   /**
    * 創建一個新的符文
@@ -24,9 +24,9 @@ export class RuneEngravingSystem {
       name,
       effect,
       engravedAt: new Date().toISOString()
-    };
-    this.runes.push(rune);
-    return rune;
+    }
+    this.runes.push(rune)
+    return rune
   }
 
   /**
@@ -34,6 +34,6 @@ export class RuneEngravingSystem {
    * @returns Rune[]
    */
   getAllRunes(): Rune[] {
-    return this.runes;
+    return this.runes
   }
 }

@@ -3,14 +3,14 @@
  * 用於創建與管理權限物件。
  */
 export interface Authority {
-  id: string;
-  type: string;
-  permissions: string[];
-  createdAt: string;
+  id: string
+  type: string
+  permissions: string[]
+  createdAt: string
 }
 
 export class AuthorityForgeEngine {
-  private authorities: Authority[] = [];
+  private authorities: Authority[] = []
 
   /**
    * 創建一個新的權限物件
@@ -24,9 +24,9 @@ export class AuthorityForgeEngine {
       type,
       permissions,
       createdAt: new Date().toISOString()
-    };
-    this.authorities.push(authority);
-    return authority;
+    }
+    this.authorities.push(authority)
+    return authority
   }
 
   /**
@@ -34,6 +34,6 @@ export class AuthorityForgeEngine {
    * @returns Authority[]
    */
   getAllAuthorities(): Authority[] {
-    return this.authorities;
+    return this.authorities
   }
 }

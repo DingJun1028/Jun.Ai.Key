@@ -10,7 +10,7 @@ export interface KnowledgeSnippet {
 }
 
 export class KnowledgeExtractor {
-  private snippets: KnowledgeSnippet[] = [];
+  private snippets: KnowledgeSnippet[] = []
 
   /**
    * 擷取一段知識片段
@@ -24,9 +24,9 @@ export class KnowledgeExtractor {
       content,
       source,
       extractedAt: new Date().toISOString()
-    };
-    this.snippets.push(snippet);
-    return snippet;
+    }
+    this.snippets.push(snippet)
+    return snippet
   }
 
   /**
@@ -34,6 +34,6 @@ export class KnowledgeExtractor {
    * @returns KnowledgeSnippet[]
    */
   getAllSnippets(): KnowledgeSnippet[] {
-    return this.snippets;
+    return this.snippets
   }
 }

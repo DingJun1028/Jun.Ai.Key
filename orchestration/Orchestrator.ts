@@ -5,7 +5,7 @@
 export interface RouteTask {
   userId: string;
   action: string;
-  payload: any;
+  payload: unknown;
 }
 
 export class Orchestrator {

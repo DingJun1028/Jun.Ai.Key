@@ -12,13 +12,13 @@ export interface Context {
 
 export interface PlanStep {
   skillType: string;
-  parameters: any;
+  parameters: Record<string, unknown>;
 }
 
 // 假設的向量資料庫介面
 export interface VectorDatabase {
   query(params: { userId: string; vectors: number[]; topK: number }): Promise<Array<{ content: string }>>;
-  insert(record: any): Promise<void>;
+  insert(record: { id: string; data: unknown }): Promise<void>;
 }
 
 // 假設的嵌入服務
@@ -28,9 +28,9 @@ export const EmbeddingService = {
    * @param keywords 關鍵字陣列
    * @returns Promise<number[]> 向量
    */
-  generate: async (keywords: string[]): Promise<number[]> => {
-    // 模擬嵌入向量
-    return [1, 2, 3];
+  generate: async (_keywords: string[]): Promise<number[]> => {
+    void _keywords
+    return [1, 2, 3]
   }
 };
 
@@ -62,7 +62,7 @@ export class MemoryPalace {
    * @param step 執行步驟
    * @param result 執行結果
    */
-  async storeExecution(step: PlanStep, result: any): Promise<void> {
+  async storeExecution(step: PlanStep, result: unknown): Promise<void> {
     const memoryRecord = {
       type: 'execution',
       content: `Executed ${step.skillType} with params: ${JSON.stringify(step.parameters)}`,
