@@ -95,6 +95,7 @@ flowchart LR
 - [all-promises](#all-promises)
 - [junai-key-development-plan-and-vision](#junai-key-development-plan-and-vision)
 - [bi-core-bidirectional-sync-center-boostspace-supabase](#bi-core-bidirectional-sync-center-boostspace-supabase)
+- [dual-core-sync-integration-center-and-agent-group](#dual-core-sync-integration-center-and-agent-group)
 
 ---
 
@@ -726,6 +727,168 @@ supabase:
 
 - 每次同步時，會比對 `updated_at` 或 `version` 欄位，僅在狀態變更時才觸發寫入。
 - 寫入時標記來源（如 `source: boostspace` 或 `source: supabase`），避免重複觸發。
+
+---
+
+## dual-core-sync-integration-center-and-agent-group
+
+![card-illustration](images/junaikey-infinity-loop.svg)
+
+### architecture-overview
+
+```mermaid
+flowchart TD
+    A[dual-core sync integration center] --> B[agent group]
+    B --> C[task sync]
+    B --> D[data sync]
+    C --> E[boostspace]
+    D --> F[supabase]
+    E <--> F
+    B --> G[sync loop prevention]
+```
+
+<!-- language: zh-tw -->
+```mermaid
+flowchart TD
+    A[雙核心同步整合中心] --> B[代理群]
+    B --> C[任務同步]
+    B --> D[資料同步]
+    C --> E[Boostspace]
+    D --> F[Supabase]
+    E <--> F
+    B --> G[循環防呆機制]
+```
+
+### technical-overview
+
+The dual-core sync integration center coordinates agent groups to achieve robust, extensible, and loop-safe bi-directional synchronization between platforms (e.g., Boostspace, Supabase, Notion, Capacities). Each agent in the group is responsible for a specific sync task, with built-in state/version checks to prevent infinite loops and data conflicts.
+
+<!-- language: zh-tw -->
+雙核心同步整合中心協調代理群，實現多平台（如 Boostspace、Supabase、Notion、Capacities）間的高擴展性、循環防呆的雙向同步。每個代理負責特定同步任務，並內建狀態/版本比對，防止無限循環與資料衝突。
+
+### extensibility-and-design
+
+- Modular agent group: Each agent can be extended or replaced for new platforms.
+- Sync loop prevention: All sync operations include source marking and version/state comparison.
+- Centralized integration: The center manages agent orchestration, error handling, and cross-platform mapping.
+
+<!-- language: zh-tw -->
+- 模組化代理群：每個代理可擴充或替換以支援新平台。
+- 循環防呆：所有同步操作皆標記來源並比對版本/狀態。
+- 集中式整合：中心負責代理協調、錯誤處理與跨平台欄位對應。
+
+### agent-group-design-example
+
+```mermaid
+flowchart TD
+    subgraph IntegrationCenter
+        direction TB
+        A1[BoostspaceAgent]
+        A2[SupabaseAgent]
+        A3[NotionAgent]
+        A4[CapacitiesAgent]
+    end
+    IntegrationCenter --> B[SyncCoordinator]
+    B --> C[SyncLoopGuard]
+    B --> D[FieldMapper]
+```
+
+<!-- language: zh-tw -->
+```mermaid
+flowchart TD
+    subgraph 整合中心
+        direction TB
+        A1[Boostspace代理]
+        A2[Supabase代理]
+        A3[Notion代理]
+        A4[Capacities代理]
+    end
+    整合中心 --> B[同步協調器]
+    B --> C[循環防呆]
+    B --> D[欄位對應器]
+```
+
+### typescript-agent-group-example
+
+```ts
+// agent-group.ts
+export interface SyncAgent {
+  name: string;
+  sync(payload: any): Promise<void>;
+}
+
+export class BoostspaceAgent implements SyncAgent {
+  name = 'boostspace';
+  async sync(payload: any) {
+    // implement boostspace sync logic
+  }
+}
+
+export class SupabaseAgent implements SyncAgent {
+  name = 'supabase';
+  async sync(payload: any) {
+    // implement supabase sync logic
+  }
+}
+
+export class SyncCoordinator {
+  agents: SyncAgent[];
+  constructor(agents: SyncAgent[]) {
+    this.agents = agents;
+  }
+  async syncAll(payload: any) {
+    for (const agent of this.agents) {
+      await agent.sync(payload);
+    }
+  }
+}
+```
+
+<!-- language: zh-tw -->
+```ts
+// agent-group.ts
+export interface SyncAgent {
+  name: string;
+  sync(payload: any): Promise<void>;
+}
+
+export class BoostspaceAgent implements SyncAgent {
+  name = 'boostspace';
+  async sync(payload: any) {
+    // 實作 boostspace 同步邏輯
+  }
+}
+
+export class SupabaseAgent implements SyncAgent {
+  name = 'supabase';
+  async sync(payload: any) {
+    // 實作 supabase 同步邏輯
+  }
+}
+
+export class SyncCoordinator {
+  agents: SyncAgent[];
+  constructor(agents: SyncAgent[]) {
+    this.agents = agents;
+  }
+  async syncAll(payload: any) {
+    for (const agent of this.agents) {
+      await agent.sync(payload);
+    }
+  }
+}
+```
+
+### sync-loop-prevention-logic
+
+- Each sync operation checks the `version` or `updated_at` field before writing.
+- Source marking (e.g., `source: boostspace` or `source: supabase`) is used to avoid redundant triggers.
+- The SyncCoordinator ensures that only changed data is propagated, preventing infinite loops.
+
+<!-- language: zh-tw -->
+- 每次同步前比對 `version` 或 `updated_at` 欄位。
+- 寫入時標記來源（如 `source: boostspace` 或 `source: supabase`），避免重複觸發。
+- 同步協調器僅傳遞變更資料，防止無限循環。
 
 ---
 
