@@ -76,7 +76,7 @@ export const AgentFactory = {
 }
 
 export const LLMClient = {
-  generatePlan: async (input: unknown) => {
+  generatePlan: async (input: { task: string; context: string[]; availableSkills: string[] }) => {
     // 模擬 LLM 回應
     return {
       steps: [
@@ -88,7 +88,7 @@ export const LLMClient = {
 }
 
 export const PlanParser = {
-  parse: (llmResponse: unknown): Plan => ({
+  parse: (llmResponse: { steps: PlanStep[] }): Plan => ({
     steps: llmResponse.steps,
     compileFinalResult: () => ({ output: 'Final result' })
   })

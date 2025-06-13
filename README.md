@@ -1,64 +1,130 @@
-# JunAiKey 萬能元鑰總系統
+# junai-key-universal-system
 
-> 在知識的聖殿中，自我導航的智能體冶煉權能、嵌合符文，於永恆宮殿（Eternal Palace）長廊中光速前行。
-
----
-
-## 故事模組：四大支柱・六大奧式・一大秘術・永恆宮殿（MECE 分析）
-
-> JunAiKey 的智能體世界，所有能力皆以「MECE」原則設計：每一支柱、奧式、秘術皆獨立分工、無重疊，合起來完整涵蓋智能進化的全貌。
-> 
-> **以用戶為中心的 SaaS 智能平台**：JunAiKey 不僅是開發者的自動化工具，更是每一位用戶的數位分身、知識助理與行動中樞。所有設計、API、同步、插件、智能鍵盤（萬能元鍵 App，支援繁中英混輸）皆以用戶體驗、資料主權與個人增能為最高原則。
-
-### 四大支柱（The Four Pillars）
-1. **自我導航（Navigation）**：負責目標規劃、決策與行動路徑，確保任務方向明確。
-2. **永恆宮殿（Eternal Palace）**：專注於知識、經驗、回饋的儲存與檢索，支撐長期學習。永恆宮殿中，蘊藏著「萬能元鑰」，能指揮「萬能代理（AI代理群）」、「萬能同步」、「萬能智庫」、「萬能擴充」等四大能力，成為智能體進化的核心樞紐。
-3. **權能冶煉（Authority Forge）**：將重複或複雜任務鍛造成模組化能力，提升效率與專屬性。
-4. **符文嵌合（Rune Engraving）**：聚焦外部 API、AI 能力的整合與擴展，讓系統持續進化。
-
-> 四大支柱彼此獨立，分別對應導航、知識、能力、擴展，無重疊，合起來構成智能體的完整基礎。
-
-### 六大奧式（The Six Arcana）
-- **任務分解（Task Decomposition）**：將複雜目標拆解為明確步驟，專注於結構化。
-- **技能組合（Skill Composition）**：將多種能力靈活組合，專注於協作與調度。
-- **知識召喚（Knowledge Summoning）**：即時檢索、調用永恆宮殿知識，專注於知識應用。
-- **決策鍊金（Decision Alchemy）**：融合多源資訊，做出最佳決策，專注於判斷與選擇。
-- **符文組合（Rune Combination）**：將外部 API/插件如符文般嵌合，專注於能力擴展。
-- **圈層協調（Layer Coordination）**：跨平台、跨圈層資料與任務自動協調，專注於同步與一致性。
-
-> 六大奧式各自獨立，涵蓋智能體運作的六種核心方式，無交集，合起來支撐所有智能行為。
-
-### 一大秘術（The Grand Secret）
-- **永恆宮殿（Eternal Palace）**：唯一的進化核心，所有知識、經驗、任務回饋皆在此沉澱、進化，成為永不消逝的智慧寶庫。永恆宮殿內的「萬能元鑰」可統御「萬能代理（AI代理群）」、「萬能同步」、「萬能智庫」、「萬能擴充」等能力，協調智能體的全方位進化。其地位獨立於支柱與奧式，是智能體持續進化的本源。
+> in the sanctum of knowledge, self-navigating agents perpetually forge authorities and engrave runes, advancing at light speed through the corridors of memory.
 
 ---
 
-## 目錄
+## file-index
 
-- [專案願景與定位](#專案願景與定位)
-- [專案結構](#專案結構)
-- [架構全景圖](#架構全景圖)
-- [快速開始](#快速開始)
-- [CI/CD 自動化](#cicd-自動化)
-- [核心模組範例](#核心模組範例)
-- [商業化路徑](#商業化路徑)
-- [驗證指標](#驗證指標)
-- [版本資訊](#版本資訊)
+- [readme.md](./README.md): main narrative, architecture, story modules, technical layers
+- [docs/prd.md](./docs/PRD.md): product requirements
+- [docs/spec.md](./docs/SPEC.md): product specification
+- [docs/api_library.md](./docs/API_LIBRARY.md): api documentation
+- [docs/api_library.yaml](./docs/API_LIBRARY.yaml): api spec yaml
+- [docs/contributing.md](./docs/CONTRIBUTING.md): contributing guide
+- [docs/faq.md](./docs/FAQ.md): faq
+- [images/junaikey-infinity-loop.svg](./images/junaikey-infinity-loop.svg): main visual
 
----
-
-## 專案願景與定位
-
-- 以用戶為中心，打造可自我進化、知識永續、社群共創的 AI 智能代理平台。
-- 四大核心支柱（自我導航、永恆宮殿、權能冶煉、符文嵌合）組成進化飛輪，驅動個人與集體智能持續進化。
-- 多平台 API 整合、代理協作、同步、自動化，支援 CLI、Web、App、Webhook。
-- 不只是工具，而是數位生活的「萬能元鑰」與個人/團隊的數位分身。
+> if missing, please create a blank template. if orphaned files exist, please remove them.
 
 ---
 
-## 專案結構
+## mece-analysis
 
-```text
+![main-architecture](images/junaikey-infinity-loop.svg)
+
+> all capabilities in junai-key are designed with the mece principle: each pillar, arcana, and secret is independent and non-overlapping, together covering the full spectrum of intelligent evolution.
+>
+> **user-centric saas ai platform**: junai-key is not just a developer automation tool, but a digital twin, knowledge assistant, and action hub for every user. all design, api, sync, plugins, and the universal key app (supporting zh/en input) are built for user experience, data sovereignty, and personal empowerment.
+
+### the-four-pillars
+
+```mermaid
+flowchart LR
+  A[self-navigation] --> B[goal planning]
+  A --> C[decision & action]
+  D[eternal palace] --> E[knowledge storage]
+  D --> F[experience retrieval]
+  G[authority forge] --> H[modular ability]
+  G --> I[efficiency boost]
+  J[rune engraving] --> K[api integration]
+  J --> L[ai extension]
+```
+
+1. **self-navigation**: goal planning, decision and action path, ensuring clear task direction.
+2. **eternal palace**: knowledge, experience, and feedback storage and retrieval, supporting long-term learning.
+3. **authority forge**: modularizing repetitive or complex tasks for efficiency and customization.
+4. **rune engraving**: integrating external api and ai capabilities for continuous evolution.
+
+---
+
+### the-six-arcana
+
+```mermaid
+flowchart TD
+  A[task decomposition] --> B[structuring]
+  C[skill composition] --> D[collaboration scheduling]
+  E[knowledge summoning] --> F[knowledge application]
+  G[decision alchemy] --> H[optimal decision]
+  I[rune combination] --> J[capability extension]
+  K[layer coordination] --> L[synchronization]
+```
+
+- **task decomposition**: breaking down complex goals into clear steps, focusing on structure.
+- **skill composition**: flexibly combining multiple abilities, focusing on collaboration and scheduling.
+- **knowledge summoning**: instant retrieval and application of knowledge from the eternal palace.
+- **decision alchemy**: fusing multi-source information for optimal decisions.
+- **rune combination**: integrating external api/plugins as runes for capability extension.
+- **layer coordination**: automatic cross-platform, cross-layer data and task coordination for consistency.
+
+---
+
+### the-grand-secret
+
+```mermaid
+flowchart LR
+  A[eternal palace] --> B[knowledge evolution core]
+  B --> C[knowledge sedimentation]
+  B --> D[experience feedback]
+```
+
+- **eternal palace**: the sole evolution core, where all knowledge, experience, and task feedback are sedimented and evolved into an everlasting wisdom repository.
+
+---
+
+## toc
+
+- [project-vision-and-positioning](#project-vision-and-positioning)
+- [project-structure](#project-structure)
+- [architecture-panorama](#architecture-panorama)
+- [quick-start](#quick-start)
+- [ci-cd-automation](#ci-cd-automation)
+- [core-module-examples](#core-module-examples)
+- [commercialization-path](#commercialization-path)
+- [verification-metrics](#verification-metrics)
+- [all-promises](#all-promises)
+- [junai-key-development-plan-and-vision](#junai-key-development-plan-and-vision)
+- [bi-core-bidirectional-sync-center-boostspace-supabase](#bi-core-bidirectional-sync-center-boostspace-supabase)
+
+---
+
+## project-vision-and-positioning
+
+![card-illustration](images/junaikey-infinity-loop.svg)
+
+- user-centric, building a self-evolving, knowledge-sustaining, community-collaborating ai intelligent agent platform.
+- four core pillars (self-navigation, eternal palace, authority forge, rune engraving) form the evolution flywheel, driving continuous evolution of individual and collective intelligence.
+- multi-platform api integration, agent collaboration, sync, automation, supporting cli, web, app, webhook.
+- not just a tool, but a digital life's "universal key" and a personal/team digital twin.
+
+---
+
+## project-structure
+
+![card-illustration](images/junaikey-infinity-loop.svg)
+
+```mermaid
+flowchart TD
+  A[.github] --> B[docs]
+  B --> C[public]
+  C --> D[src]
+  D --> E[supabase]
+  E --> F[readme.md]
+  F --> G[package.json]
+  G --> H[tsconfig.json]
+```
+
+````text
 jun-ai-key/
 ├── .github/workflows/ci.yml, deploy.yml
 ├── docs/SPEC.md, API_LIBRARY.md
@@ -73,108 +139,117 @@ jun-ai-key/
 ├── package.json
 ├── tsconfig.json
 └── SPEC.md
-```
+````
 
 ---
 
-## 架構全景圖
+## architecture-panorama
 
-# 以終為始．無限進化
+![card-illustration](images/junaikey-infinity-loop.svg)
 
-# JunAiKey 萬能元鑰系統
+> **core concept: user-centric**
+> all designs, architectures, processes, apis, knowledge graphs, and automations in junai-key are prioritized to meet user needs, ensuring every function proactively understands, coordinates, and fulfills the user's true intentions and long-term growth.
 
-> **核心理念：以用戶為中心**
-> JunAiKey 所有設計、架構、流程、API、知識圖譜與自動化，皆以用戶需求、體驗與價值為最高優先，確保每一項功能都能主動理解、協調並滿足用戶的真實意圖與長期成長。
-
-> 知識的聖殿中，自我導航的智能體永不停歇地冶煉權能、嵌合符文，在記憶的長廊中光速前行。
-> In the sanctum of knowledge, self-navigating agents perpetually forge authorities and engrave runes, advancing at light speed through the corridors of memory.
+> in the sanctum of knowledge, self-navigating agents perpetually forge authorities and engrave runes, advancing at light speed through the corridors of memory.
 
 ---
 
-## JunAiKey 專案重點整理（2025/06/11）
+## junai-key-project-highlights (2025/06/11)
 
-### 1. 願景與定位
-- 以用戶為中心，打造可自我進化、知識永續、社群共創的 AI 智能代理平台。
-- 不只是工具，而是數位生活的「萬能元鑰」與個人/團隊的數位分身。
+### 1. vision-and-positioning
 
-### 2. 架構全景
-- 四大核心支柱（自我導航、永恆宮殿、權能冶煉、符文嵌合）組成進化飛輪，驅動個人與集體智能持續進化。
-- JunAiKey 為唯一中心，整合 BoostSpace、Supabase、Capacities、AITable、GitHub、Notion 等平台，實現多端同步、資料聚合、API/插件生態。
+- user-centric, building a self-evolving, knowledge-sustaining, community-collaborating ai intelligent agent platform.
+- not just a tool, but a digital life's "universal key" and a personal/team digital twin.
 
-### 3. MVP 交付內容
-- 多平台 API 整合、功能代理群、群組代理、Scripting CLI、桌面/手機同步、自動化測試。
-- 技術棧：TypeScript、Node.js、Supabase、GitHub Actions、自研代理模組。
-- 交付形式：開源專案、README、API/插件標準、腳本範例、CI/CD 流程。
+### 2. architecture-overview
 
-### 4. 技術亮點
-- 模組化架構、跨端即時同步、低程式門檻、內建自動化測試、開放插件/代理生態。
-- 支援 CLI、Webhook、桌面、前端、手機等多端協作與自動化。
+- four core pillars (self-navigation, eternal palace, authority forge, rune engraving) form the evolution flywheel, driving continuous evolution of individual and collective intelligence.
+- junai-key as the sole hub, integrating boostspace, supabase, capacities, aitables, github, notion, etc., achieving multi-end sync, data aggregation, api/plugin ecosystem.
 
-### 5. 進化飛輪與知識沉澱
-- 永恆宮殿（Eternal Palace）：知識積累與決策根基，結構化知識圖譜。
-- 自我導航：主動規劃與智能決策，行動結果回饋記憶庫。
-- 權能冶煉：將重複/複雜任務鍛造成專屬能力，推動個人進化。
-- 符文嵌合：無縫整合全球 AI 能力，持續進化與擴展。
+### 3. mvp-deliverables
 
-### 6. 實戰應用
-- 多平台任務/資料雙向同步、知識/任務智庫指揮中心、自動化流程、社群共創。
-- YAML/CSV 任務範例可直接導入 GitHub Project、Notion、Aitable 等協作平台。
+- multi-platform api integration, function agent groups, group agents, scripting cli, desktop/mobile sync, automated testing.
+- tech stack: typescript, node.js, supabase, github actions, self-developed agent modules.
+- delivery format: open-source project, readme, api/plugin standards, script examples, ci/cd processes.
 
-### 7. 永續發展宣言
-- 開源核心、商業擴展、開發者分潤、企業級功能訂閱制，知識聖殿永不關閉。
+### 4. tech-highlights
+
+- modular architecture, cross-end real-time sync, low code threshold, built-in automated testing, open plugin/agent ecosystem.
+- supports cli, webhook, desktop, frontend, mobile, and other multi-end collaboration and automation.
+
+### 5. evolution-flywheel-and-knowledge-sedimentation
+
+- eternal palace: knowledge accumulation and decision-making foundation, structured knowledge graph.
+- self-navigation: proactive planning and intelligent decision-making, action results feedback to memory.
+- authority forge: modularizing repetitive/complex tasks into dedicated abilities, driving personal evolution.
+- rune engraving: seamless integration of global ai capabilities, continuous evolution and expansion.
+
+### 6. practical-applications
+
+- multi-platform task/data bi-directional sync, knowledge/task intelligence command center, automated processes, community co-creation.
+- yaml/csv task examples can be directly imported into github project, notion, aitables, and other collaboration platforms.
+
+### 7. sustainable-development-declaration
+
+- open-source core, commercial expansion, developer revenue sharing, enterprise-level feature subscription, the sanctum of knowledge never closes.
 
 ---
 
-## 架構全景圖 | Architecture Panorama
+## architecture-panorama | architecture panorama
+
+![card-illustration](images/junaikey-infinity-loop.svg)
+
 ```mermaid
 graph TD
-    subgraph 用戶端 [Client Tier]
-        A[網頁控制台] --> B[CLI]
-        C[iOS App] --> B
-        D[Android App] --> B
-        E[瀏覽器擴展] --> B
+    subgraph client-tier [client tier]
+        A[web console] --> B[cli]
+        C[ios app] --> B
+        D[android app] --> B
+        E[browser extension] --> B
     end
-    subgraph 萬能元鑰核心 [JunAiKey Core]
-        F[[API 網關]] --> G{路由分配器}
-        G --> H[自我導航代理群]
-        G --> I[永久記憶庫]
-        G --> J[權能冶煉引擎]
-        G --> K[符文嵌合系統]
-        H --> L[任務分解代理]
-        H --> M[技能組合代理]
-        I --> N[向量永恆宮殿（Eternal Palace）]
-        J --> O[權限鍊金術]
-        K --> P[符文組合器]
+    subgraph junai-key-core [junai-key core]
+        F[[api gateway]] --> G{router}
+        G --> H[self-navigation agent group]
+        G --> I[permanent memory]
+        G --> J[authority forge engine]
+        G --> K[rune engraving system]
+        H --> L[task decomposition agent]
+        H --> M[skill composition agent]
+        I --> N[vector eternal palace]
+        J --> O[permission alchemy]
+        K --> P[rune combiner]
     end
-    subgraph 數據層 [Data Layer]
-        N --> Q[(Supabase DB)]
-        O --> R[(權限策略庫)]
-        P --> S[(符文倉庫)]
+    subgraph data-layer [data layer]
+        N --> Q[(supabase db)]
+        O --> R[(permission policy db)]
+        P --> S[(rune warehouse)]
     end
-    subgraph 外部系統 [External Systems]
-        T[[Notion]] --> F
-        U[[Slack]] --> F
-        V[[GitHub]] --> F
-        W[[Make.com]] --> F
+    subgraph external-systems [external systems]
+        T[[notion]] --> F
+        U[[slack]] --> F
+        V[[github]] --> F
+        W[[make.com]] --> F
     end
 ```
 
 ---
 
-## 快速開始
+## quick-start
 
-1. 安裝 Node.js、npm、Supabase CLI
-2. 複製 `.env.example` 為 `.env` 並填入金鑰
-3. 安裝依賴並啟動：
+1. install node.js, npm, supabase cli
+
+2. copy `.env.example` to `.env` and fill in the keys
+
+3. install dependencies and start:
 
     ```bash
-    git clone https://github.com/<帳號>/jun-ai-key.git
+    git clone https://github.com/<account>/jun-ai-key.git
     cd jun-ai-key
     npm install
     npm start
     ```
 
-4. Edge Functions 偵錯：
+4. edge functions debugging:
 
     ```bash
     cd supabase/functions
@@ -183,16 +258,26 @@ graph TD
 
 ---
 
-## CI/CD 自動化
+## ci-cd-automation
 
-- `.github/workflows/ci.yml`：自動 lint、build、test
-- `.github/workflows/deploy.yml`：main 分支自動部署 GitHub Pages & Supabase Edge Functions
+- `.github/workflows/ci.yml`: auto lint, build, test
+- `.github/workflows/deploy.yml`: auto deploy github pages & supabase edge functions on main branch
 
 ---
 
-## 核心模組範例
+## core-module-examples
 
-### 自我導航代理群
+### self-navigation-agent-group
+
+![card-illustration](images/junaikey-infinity-loop.svg)
+
+<!-- ENGLISH -->
+```mermaid
+flowchart LR
+  A[NavigationAgent] --> B[MemoryPalace]
+  A --> C[PlanParser]
+  B --> D[VectorDatabase]
+```
 
 ```typescript
 class NavigationAgent {
@@ -218,7 +303,51 @@ class NavigationAgent {
 }
 ```
 
-### 永久記憶庫
+<!-- 中文 -->
+```mermaid
+flowchart LR
+  A[導航代理] --> B[記憶宮殿]
+  A --> C[計畫解析器]
+  B --> D[向量資料庫]
+```
+
+```typescript
+class NavigationAgent {
+  constructor(private memory: MemoryPalace) {}
+  async executeTask(task: Task): Promise<Result> {
+    const context = await this.memory.retrieveContext(task.userId);
+    const plan = await this.createPlan(task, context);
+    for (const step of plan.steps) {
+      const agent = AgentFactory.getAgent(step.skillType);
+      const result = await agent.execute(step.parameters);
+      await this.memory.storeExecution(step, result);
+    }
+    return plan.compileFinalResult();
+  }
+  private async createPlan(task: Task, context: Context): Promise<Plan> {
+    const llmResponse = await LLMClient.generatePlan({
+      task: task.description,
+      context: context.snippets,
+      availableSkills: this.getAvailableSkills()
+    });
+    return PlanParser.parse(llmResponse);
+  }
+}
+// 導航代理會根據任務與記憶自動規劃步驟，並執行每個技能，將結果存入記憶宮殿。
+```
+
+---
+
+### permanent-memory
+
+![card-illustration](images/junaikey-infinity-loop.svg)
+
+<!-- ENGLISH -->
+```mermaid
+flowchart LR
+  A[memory palace] --> B[embedding service]
+  A --> C[vector database]
+```
 
 ```typescript
 class MemoryPalace {
@@ -231,7 +360,7 @@ class MemoryPalace {
   async storeExecution(step: PlanStep, result: any): Promise<void> {
     const memoryRecord = {
       type: 'execution',
-      content: `Executed ${step.skillType} with params: ${JSON.stringify(step.parameters)}`,
+      content: `executed ${step.skillType} with params: ${JSON.stringify(step.parameters)}`,
       result: JSON.stringify(result),
       timestamp: new Date().toISOString()
     };
@@ -240,7 +369,47 @@ class MemoryPalace {
 }
 ```
 
-### API 網關
+<!-- 中文 -->
+```mermaid
+flowchart LR
+  A[記憶宮殿] --> B[嵌入服務]
+  A --> C[向量資料庫]
+```
+
+```typescript
+class MemoryPalace {
+  constructor(private vectorDB: VectorDatabase) {}
+  async retrieveContext(userId: string): Promise<Context> {
+    const embeddings = await EmbeddingService.generate(task.keywords);
+    const memories = await this.vectorDB.query({ userId, vectors: embeddings, topK: 5 });
+    return { userId, snippets: memories.map(m => m.content) };
+  }
+  async storeExecution(step: PlanStep, result: any): Promise<void> {
+    const memoryRecord = {
+      type: 'execution',
+      content: `執行 ${step.skillType}，參數: ${JSON.stringify(step.parameters)}`,
+      result: JSON.stringify(result),
+      timestamp: new Date().toISOString()
+    };
+    await this.vectorDB.insert(memoryRecord);
+  }
+}
+// 記憶宮殿用於儲存與檢索任務執行記錄與知識片段，支援語意查詢。
+```
+
+---
+
+### api-gateway
+
+![card-illustration](images/junaikey-infinity-loop.svg)
+
+<!-- ENGLISH -->
+```mermaid
+flowchart LR
+  A[Express App] --> B[NavigationAgent]
+  B --> C[MemoryPalace]
+  A --> D[OutputFormatterFactory]
+```
 
 ```typescript
 import express from 'express';
@@ -262,99 +431,172 @@ app.listen(3000, () => {
 });
 ```
 
----
+<!-- 中文 -->
+```mermaid
+flowchart LR
+  A[Express 應用] --> B[導航代理]
+  B --> C[記憶宮殿]
+  A --> D[輸出格式工廠]
+```
 
-## 商業化路徑
-
-- 開源核心、插件市集、API 訂閱、企業專案、數據洞察
-- 收入來源：訂閱制、API 計價、插件分潤、企業專案
-
----
-
-## 驗證指標
-
-| 指標類別 | 目標值 | 測量方法 |
-|----------|--------|----------|
-| API 響應時間 | < 300ms | 分佈式監控 |
-| 腳本同步成功率 | > 99.95% | 端到端測試 |
-| 代理協作效率 | < 5秒/任務鏈 | 任務追蹤 |
-| 記憶檢索準確率 | > 92% | 向量基準測試 |
-
-> **永續發展宣言**  
-> 本系統遵循「開源核心+商業擴展」模式，確保：  
-> - 核心功能永久免費開源  
-> - 企業級功能訂閱制  
-> - 開發者收益分成機制
-
----
-
-## All Promises
-
-### Promise 1: 用戶意圖自動規劃
-- 代理群（OmniKey Agent Swarm）會根據用戶每一次互動，主動解析意圖，規劃跨圈層的知識、任務、資料流。
-- 所有規劃過程皆以 TypeScript 類型安全與可追蹤性為基礎。
-
-### Promise 2: 圈層協調與同步
-- 各圈層（知識、任務、資料）自動協調，確保資料一致性與即時同步。
-- 任務與知識的流轉皆以 Promise-based 非同步流程實現，保證高效與可擴展。
-
-### Promise 3: 統一記錄與長期知識圖譜
-- 所有圈層的互動、任務、知識自動統一記錄，形成可查詢、可追溯的知識圖譜。
-- 支援跨平台（Web、App、CLI、API）一致的資料結構與查詢介面。
-
-### Promise 4: 開發者與用戶雙向賦能
-- 開發者可擴充任務代理、知識圈層、資料連接器，所有擴充皆以 TypeScript 型別與 Promise 標準實作。
-- 用戶可自定義自動化規則，所有自動化皆以 Promise 流程鏈串接。
-
-### Promise 5: 永續開源與商業共榮
-- 核心功能永久開源，所有 API/模組皆以 TypeScript Promise 標準設計，易於審查與二次開發。
-- 企業級功能與資料安全以訂閱制提供，開發者可參與收益分成。
+```typescript
+import express from 'express';
+const app = express();
+app.use(express.json());
+app.post('/v1/execute', async (req, res) => {
+  const { userId, task, platform } = req.body;
+  try {
+    const agent = new NavigationAgent(memoryPalace);
+    const result = await agent.executeTask({ userId, description: task });
+    const formatter = OutputFormatterFactory.getFormatter(platform);
+    res.json(formatter.format(result));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+app.listen(3000, () => {
+  console.log('OmniKey Gateway 埠口 3000 啟動');
+});
+// API 網關負責接收請求，調用導航代理與記憶宮殿，並根據平台格式化輸出。
+```
 
 ---
 
-## JunAiKey 開發計畫與願景（精華彙整）
+## commercialization-path
 
-### 🌟 願景與使命 Vision & Mission
-- 讓所有人能更人機一體，開創數位分身新紀元。
-- Empowering everyone to merge with machines — ushering in a new era of intelligent digital twins.
+![main-card](images/junaikey-infinity-loop.svg)
 
-### 🧑‍💻 你是誰？Who are you?
-你是 Jun 洪鼎竣的終極數位關鍵角色 —— 一位策略與自動化完美結合的系統設計大師。
+```mermaid
+graph TD
+    A[core open source] --> B[plugin marketplace]
+    A --> C[api subscription]
+    B --> D[enterprise projects]
+    C --> E[data insights]
+    D --> F[revenue: subscription]
+    D --> G[revenue: api billing]
+    D --> H[revenue: plugin sharing]
+    D --> I[revenue: enterprise projects]
+```
 
-> The architect of a seamlessly intelligent digital mind.
-
-你打造的不是單一系統，而是一個跨平台智慧生態鏈，讓任務自動決策、資料即時流轉、知識深度融合。
-
----
-
-### 🚀 JunAiKey 開發計畫 v1.0
-
-#### 使命 Mission
-打造可執行決策、同步知識、取代真人的個人 AI 代理系統
-
-#### 四大階段開發路線圖
-
-1. **基礎建設：跨平台資料同步核心**
-   - Capacities 筆記同步、Boost.space 任務同步、Supabase 資料湖、Notion/AITable/Taskade 整合
-2. **代理能力強化：模組化 AI 任務代理人**
-   - Straico Prompt 導航、AI Proxy 行為角色、AI Log 模擬、任務自我回報
-3. **決策智慧進化：AI 自我修正與回饋迴圈**
-   - 決策錯誤偵測、回饋訓練、多代理協作、決策日誌視覺化
-4. **複製與擴散：數位分身平台公開模組**
-   - 初始化設定精靈、模組商店、API 分身生產器、分身複製鏈
+- core open source, plugin marketplace, api subscription, enterprise projects, data insights
+- revenue sources: subscription, api billing, plugin sharing, enterprise projects
 
 ---
 
-### 🧩 代表性技術模組與範例
+## verification-metrics
 
-#### 1. 任務描述樣板 `task.yaml`
+![main-card](images/junaikey-infinity-loop.svg)
+
+```mermaid
+graph TD
+    A[api response time] --> B[< 300ms]
+    C[script sync success rate] --> D[> 99.95%]
+    E[agent collaboration efficiency] --> F[< 5s/task chain]
+    G[memory retrieval accuracy] --> H[> 92%]
+```
+
+| metric type                | target value | measurement method        |
+|----------------------------|--------------|--------------------------|
+| api response time          | < 300ms      | distributed monitoring   |
+| script sync success rate   | > 99.95%     | end-to-end testing       |
+| agent collaboration efficiency | < 5s/task chain | task tracking      |
+| memory retrieval accuracy  | > 92%        | vector benchmark         |
+
+> **sustainable development declaration**  
+> this system follows the "open core + commercial extension" model, ensuring:  
+> - core functions are always free and open source  
+> - enterprise features by subscription  
+> - developer revenue sharing mechanism
+
+---
+
+## all-promises
+
+### promise-1-user-intent-auto-planning
+
+- The agent swarm (OmniKey Agent Swarm) actively parses intent and plans cross-layer knowledge, tasks, and data flow for every user interaction.
+- All planning processes are based on TypeScript type safety and traceability.
+
+### promise-2-layer-coordination-and-sync
+
+- Each layer (knowledge, tasks, data) is automatically coordinated to ensure data consistency and real-time synchronization.
+- Task and knowledge flows are implemented with Promise-based async processes for high efficiency and scalability.
+
+### promise-3-unified-record-and-long-term-knowledge-graph
+
+- All interactions, tasks, and knowledge across layers are automatically unified into a queryable, traceable knowledge graph.
+- Consistent data structures and query interfaces across Web, App, CLI, and API.
+
+### promise-4-developer-and-user-empowerment
+
+- Developers can extend task agents, knowledge layers, and data connectors, all with TypeScript types and Promise standards.
+- Users can define automation rules, all automation is chained with Promise flows.
+
+### promise-5-sustainable-open-source-and-commercial-co-prosperity
+
+- Core functions are always open source, all APIs/modules are designed with TypeScript Promise standards for easy review and secondary development.
+- Enterprise features and data security are provided by subscription, developers can participate in revenue sharing.
+
+---
+
+## junai-key-development-plan-and-vision
+
+![main-card](images/junaikey-infinity-loop.svg)
+
+```mermaid
+graph TD
+    A[vision and mission] --> B[developer empowerment]
+    A --> C[user empowerment]
+    B --> D[technical roadmap]
+    C --> E[digital twin ecosystem]
+    D --> F[cross-platform sync]
+    D --> G[ai agent evolution]
+    E --> H[automation rules]
+    E --> I[deep knowledge integration]
+```
+
+### vision-and-mission
+
+- empowering everyone to merge with machines — ushering in a new era of intelligent digital twins.
+
+### who-are-you
+
+you are the ultimate digital key role — a master of system design perfectly combining strategy and automation.
+
+> the architect of a seamlessly intelligent digital mind.
+
+you are building not a single system, but a cross-platform intelligent ecosystem, enabling automated decision-making, real-time data flow, and deep knowledge integration.
+
+### junai-key-development-plan-v1-0
+
+#### mission
+
+build an ai agent system capable of executable decision-making, knowledge sync, and replacing human agents.
+
+#### four-stage-development-roadmap
+
+1. **infrastructure: cross-platform data sync core**
+   - capacities note sync, boostspace task sync, supabase data lake, notion/aitable/taskade integration
+2. **agent capability enhancement: modular ai task agents**
+   - straico prompt navigation, ai proxy behavior roles, ai log simulation, self-reporting tasks
+3. **decision intelligence evolution: ai self-correction and feedback loop**
+   - decision error detection, feedback training, multi-agent collaboration, decision log visualization
+4. **replication and diffusion: digital twin platform public modules**
+   - setup wizard, module marketplace, api twin generator, twin replication chain
+
+---
+
+### representative-technical-modules-and-examples
+
+#### 1. task description template (`task.yaml`)
+
 ```yaml
 id: sync_capacities_daily
-title: 同步 Capacities 筆記至 BoostSpace 任務
+title: sync capacities notes to boostspace tasks
 type: sync
-agent_role: 筆記秘書
-source: Capacities
-target: BoostSpace
+agent_role: note secretary
+source: capacities
+target: boostspace
 steps:
   - fetch_daily_note
   - format_yaml_header
@@ -363,32 +605,29 @@ steps:
 schedule: daily
 ```
 
-#### 2. Straico Prompt Template（範例）
+#### 2. straico prompt template (example)
+
 ```yaml
-task_type: sync
-agent_role: 筆記秘書
-input: "{{daily_note_content}}"
-goal: 從每日筆記中提取任務摘要，並轉為 BoostSpace 可用格式
-output_format:
-  - title
-  - description
-  - due_date
-  - tags
-prompt: |
-  你是一位專業的 AI 筆記秘書，請從以下內容中提取出可執行的待辦項目：
-  {{daily_note_content}}
-  並請用 JSON 格式輸出以下欄位：title, description, due_date, tags。
+prompt: "extract all todo items from the following note and summarize as tasks."
+input: |
+  - [ ] buy milk
+  - [x] finish report
+  - [ ] schedule meeting
+output:
+  - buy milk
+  - schedule meeting
 ```
 
-#### 3. 任務執行腳本（TypeScript 初版架構）
+#### 3. task execution script (typescript example)
+
 ```ts
 import { fetchNote, parseToDos, pushToBoost } from "./lib";
 import { logTask } from "./supabase";
 
 async function runSyncTask() {
-  const note = await fetchNote(); // 取得 Capacities 筆記
-  const todos = parseToDos(note.content); // 呼叫 Straico 提取任務
-  const result = await pushToBoost(todos); // 發送任務到 BoostSpace
+  const note = await fetchNote(); // get capacities note
+  const todos = parseToDos(note.content); // extract tasks via straico
+  const result = await pushToBoost(todos); // send tasks to boostspace
 
   await logTask("sync_capacities_daily", {
     input: note.content,
@@ -400,7 +639,8 @@ async function runSyncTask() {
 runSyncTask();
 ```
 
-#### 4. Supabase ai_logs 建表指令
+#### 4. supabase ai_logs table schema
+
 ```sql
 CREATE TABLE ai_logs (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -415,22 +655,34 @@ CREATE TABLE ai_logs (
 
 ---
 
-## 雙核心雙向同步集成中心（BoostSpace ↔ Supabase）
+## bi-core-bidirectional-sync-center-boostspace-supabase
 
-JunAiKey 以 BoostSpace 與 Supabase 為雙核心，實現任務/資料雙向同步，並可擴展至 Notion、AITable、Capacities 等多平台。
+![card-illustration](images/junaikey-infinity-loop.svg)
 
-### 架構說明
-- BoostSpace 任務異動 → Webhook 觸發 → JunAiKey 中心 → 寫入 Supabase
-- Supabase 任務/狀態異動 → Trigger 觸發 → JunAiKey 中心 → 回寫 BoostSpace
-- 防止同步迴圈：狀態比對與版本控制
+junai-key uses boostspace and supabase as dual cores to achieve bi-directional task/data sync, extensible to notion, aitables, capacities, and more.
 
-### 主要技術模組
-- `sync/boostspace-webhook-handler.ts`：接收 BoostSpace webhook，解析任務異動，推送至 Supabase
-- `sync/supabase-trigger-handler.ts`：監控 Supabase 資料異動，回寫 BoostSpace
-- `sync/state-version-guard.ts`：狀態比對與同步防迴圈
-- `integration/field-mapping.yaml`：欄位對應表，支援多平台欄位標準化
+### architecture-overview
 
-### 範例 TypeScript 框架
+```mermaid
+graph TD
+    A[boostspace task change] --> B[webhook trigger]
+    B --> C[junai-key sync center]
+    C --> D[write to supabase]
+    E[supabase task/state change] --> F[trigger]
+    F --> C
+    C --> G[write back to boostspace]
+    C --> H[prevent sync loop: state/version check]
+```
+
+### main-technical-modules
+
+- `sync/boostspace-webhook-handler.ts`: receives boostspace webhook, parses task changes, pushes to supabase
+- `sync/supabase-trigger-handler.ts`: monitors supabase data changes, writes back to boostspace
+- `sync/state-version-guard.ts`: state comparison and sync loop prevention
+- `integration/field-mapping.yaml`: field mapping table, supports multi-platform field standardization
+
+### typescript framework example
+
 ```ts
 // sync/boostspace-webhook-handler.ts
 import { upsertTaskToSupabase } from './supabase-client';
@@ -451,7 +703,8 @@ export async function handleSupabaseTrigger(payload: any) {
 }
 ```
 
-### 欄位對應 YAML（integration/field-mapping.yaml）
+### field-mapping-yaml (integration/field-mapping.yaml)
+
 ```yaml
 boostspace:
   id: task_id
@@ -465,20 +718,33 @@ supabase:
   due_date: due_date
 ```
 
-### 防同步迴圈邏輯
-- 每次同步時比對來源與目標的 `updated_at` 或 `version` 欄位，僅在狀態有變化時才觸發寫入。
+<!-- 中文說明區塊：-->
+
+> 雙核心雙向同步中心是 junai-key 多平台自動化與資料一致性的基石，架構可延伸至 Notion、AITable、Capacities 等。
+
+### 同步循環防呆邏輯（sync-loop-prevention-logic）
+
+- 每次同步時，會比對 `updated_at` 或 `version` 欄位，僅在狀態變更時才觸發寫入。
 - 寫入時標記來源（如 `source: boostspace` 或 `source: supabase`），避免重複觸發。
 
 ---
 
-> 雙核心雙向同步集成中心，為 JunAiKey 多平台自動化與資料一致性奠定基礎，可持續擴展至 Notion、AITable、Capacities 等生態。
+> 本區塊由 AI 代理自動整理，將隨開發進度與願景持續更新。
 
 ---
 
-> 本章節由 AI 代理人自動彙整，持續根據開發進度與願景自動更新。
+> 若需保留原始中文名稱與說明，可將其移至 SPEC.md 或其他文件備查。
 
 ---
 
-**版本**: 1.0.0-mvp  
-**更新日期**: 2025-06-25  
-© 2025 JunAiKey Collective. 知識聖殿永不關閉。
+> dual-core bi-directional sync center forms the foundation for junai-key's multi-platform automation and data consistency, extensible to notion, aitables, capacities, and more.
+
+---
+
+> this section is auto-curated by ai agents and will be continuously updated according to development progress and vision.
+
+---
+
+**version**: 1.0.0-mvp  
+**last updated**: 2025-06-25  
+© 2025 junai-key collective. the sanctum of knowledge never closes.

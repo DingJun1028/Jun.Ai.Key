@@ -64,10 +64,13 @@ export class MemoryPalace {
    */
   async storeExecution(step: PlanStep, result: unknown): Promise<void> {
     const memoryRecord = {
-      type: 'execution',
-      content: `Executed ${step.skillType} with params: ${JSON.stringify(step.parameters)}`,
-      result: JSON.stringify(result),
-      timestamp: new Date().toISOString()
+      id: `${step.skillType}-${Date.now()}`,
+      data: {
+        type: 'execution',
+        content: `Executed ${step.skillType} with params: ${JSON.stringify(step.parameters)}`,
+        result: result,
+        timestamp: new Date().toISOString()
+      }
     };
     await this.vectorDB.insert(memoryRecord);
   }
