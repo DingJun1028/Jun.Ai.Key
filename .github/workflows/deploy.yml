@@ -10,9 +10,9 @@ jobs:
   deploy-pages:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: DingJun1028/checkout@v4
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
+        uses: DingJun1028/setup-node@v4
         with:
           node-version: 20.x
       - name: Install dependencies
@@ -29,9 +29,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy-pages
     steps:
-      - uses: actions/checkout@v4
+      - uses: DingJun1028/checkout@v4
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
+        uses: DingJun1028/setup-node@v4
         with:
           node-version: 20.x
       - name: Install Supabase CLI
