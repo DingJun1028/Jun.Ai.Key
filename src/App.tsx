@@ -36,10 +36,21 @@ const vectorDB = {
   }
 }
 
+// 類型定義：代理回應
+interface AgentResult {
+  success: boolean
+  data?: unknown
+  error?: string
+}
+
 export default function App() {
   const [userId, setUserId] = useState('demo-user')
   const [task, setTask] = useState('查詢今日任務')
-  const [results, setResults] = useState<string[]>(['', '', ''])
+  const [results, setResults] = useState<AgentResult[]>([
+    { success: false },
+    { success: false },
+    { success: false }
+  ])
   const [loading, setLoading] = useState(false)
 
   // 初始化三個代理與記憶庫
@@ -53,7 +64,7 @@ export default function App() {
   // 多代理協作：同時執行三個代理，並自訂錯誤訊息與 debug log
   const handleExecute = async () => {
     setLoading(true)
-    setResults(['', '', '']) // 清空結果
+    setResults([{ success: false }, { success: false }, { success: false }])
     try {
       // 並行呼叫三個代理 API，並於每次請求前後 log debug 資訊
       const promises = agents.map((_, idx) => {
@@ -71,11 +82,11 @@ export default function App() {
             }
             const data = await res.json()
             console.debug(`${debugId} 回傳資料`, data)
-            return JSON.stringify(data, null, 2)
+            return { success: true, data }
           })
           .catch(e => {
             console.error(`${debugId} 發生錯誤`, e)
-            return `${debugId} 發生自訂錯誤: ${(e instanceof Error ? e.message : String(e))}`
+            return { success: false, error: `${debugId} 發生自訂錯誤: ${(e instanceof Error ? e.message : String(e))}` }
           })
       })
       const datas = await Promise.all(promises)
@@ -83,9 +94,9 @@ export default function App() {
     } catch (e) {
       // 理論上不會進到這裡，因為每個 promise 都有 catch
       setResults([
-        '全域自訂錯誤: ' + (e instanceof Error ? e.message : String(e)),
-        '全域自訂錯誤: ' + (e instanceof Error ? e.message : String(e)),
-        '全域自訂錯誤: ' + (e instanceof Error ? e.message : String(e))
+        { success: false, error: '全域自訂錯誤: ' + (e instanceof Error ? e.message : String(e)) },
+        { success: false, error: '全域自訂錯誤: ' + (e instanceof Error ? e.message : String(e)) },
+        { success: false, error: '全域自訂錯誤: ' + (e instanceof Error ? e.message : String(e)) }
       ])
     } finally {
       setLoading(false)
@@ -96,7 +107,6 @@ export default function App() {
     <div className="app-container" style={{ fontFamily: 'sans-serif', padding: 32, maxWidth: 700, margin: 'auto' }}>
       <h1>Jun.AI.Key 萬能元鑰系統</h1>
       <p>歡迎使用！請於左側選單選擇功能。</p>
-      {/* 可擴充：代理群、知識檢索、任務執行等元件 */}
       <h2>四大核心支柱</h2>
       <ul>
         {pillars.map(p => (
@@ -125,7 +135,11 @@ export default function App() {
       <div style={{ display: 'flex', gap: 16 }}>
         {results.map((r, i) => (
           <pre key={i} style={{ background: '#f6f8fa', padding: 16, borderRadius: 8, minHeight: 80, flex: 1 }}>
-            <b>代理 {i + 1}</b>\n{r}
+            <b>代理 {i + 1}</b>\n
+            {r.success
+              ? <span style={{ color: '#228B22' }}>✅ 成功\n{JSON.stringify(r.data, null, 2)}</span>
+              : <span style={{ color: '#d32f2f' }}>❌ 失敗\n{r.error}</span>
+            }
           </pre>
         ))}
       </div>

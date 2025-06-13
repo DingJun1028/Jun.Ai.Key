@@ -1,0 +1,28 @@
+{
+  // 讓 VS Code 可以直接偵錯 React (Webpack) 前端專案
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "啟動前端 (React/Webpack) 偵錯",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/src",
+      "breakOnLoad": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "啟動 Node (api-gateway) 偵錯",
+      "program": "${workspaceFolder}/orchestration/api-gateway.ts",
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register"
+      ],
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
