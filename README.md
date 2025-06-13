@@ -94,7 +94,7 @@ flowchart LR
 - [verification-metrics](#verification-metrics)
 - [all-promises](#all-promises)
 - [junai-key-development-plan-and-vision](#junai-key-development-plan-and-vision)
-- [bi-core-bidirectional-sync-center-boostspace-supabase](#bi-core-bidirectional-sync-center-boostspace-supabase)
+- [bi-core-bidirectional-sync-center-boostspace-supabase](#bi-core-bidirectional-sync-center-and-agent-group)
 - [dual-core-sync-integration-center-and-agent-group](#dual-core-sync-integration-center-and-agent-group)
 
 ---
@@ -463,6 +463,124 @@ app.listen(3000, () => {
 
 ---
 
+#### Extensibility & Design Notes | 擴展性與設計說明
+
+---
+
+##### 1. Design Principles & SOLID | 設計原則與 SOLID
+
+- **Open/Closed Principle (OCP) 開放封閉原則**：
+  - EN: All extension points (formatters, agents, middleware) are open for extension, closed for modification. This ensures core stability and flexible extensibility.
+  - 中文：所有擴展點（格式工廠、代理、中間件）皆遵循 OCP，核心穩定、擴展靈活。
+- **SOLID Principles**：
+  - EN: Follow SOLID (Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion) for maintainable, scalable, and testable code.
+  - 中文：遵循 SOLID 原則，確保程式碼可維護、可擴展、易於測試。
+- **TypeScript Type Safety 型別安全**：
+  - EN: Use strict interfaces, abstract classes, and type guards to ensure extensibility safety and cross-team clarity.
+  - 中文：嚴格型別（interface/abstract class/type guard）有助於國際團隊協作與維護。
+- **Bilingual Documentation 雙語文件**：
+  - EN: For international teams, always provide bilingual comments and docs.
+  - 中文：國際協作建議雙語註解與說明。
+
+---
+
+##### 2. Extensibility Patterns | 擴展模式
+
+- **Plugin-based OutputFormatterFactory 插件化輸出格式工廠**：
+  - EN: Add new output formats (Slack, CLI, Webhook, Mobile) by implementing and registering a formatter.
+  - 中文：實作並註冊 formatter，即可支援多平台格式。
+- **Middleware Support 中間件支援**：
+  - EN: Express middleware is pluggable for authentication, logging, rate limiting, CORS, etc.
+  - 中文：Express 中間件可插拔，支援認證、日誌、速率限制、跨域等。
+- **Agent Injection 代理注入**：
+  - EN: Inject different agent/memory instances based on platform or request content.
+  - 中文：可根據平台或請求內容注入不同 agent/memory 實例。
+- **API Versioning API 版本管理**：
+  - EN: Path design supports /v1/, /v2/ for smooth upgrades.
+  - 中文：路徑設計支援多版本共存，便於升級。
+
+---
+
+##### 3. Plugin Auto-Discovery & Registration | 插件自動發現與註冊
+
+- **Auto-Discovery 自動發現**：
+  - EN: Use dynamic import, glob, or registry pattern to auto-load plugins for large-scale/multi-platform scenarios.
+  - 中文：動態 import、glob、註冊表模式適用於大型協作與多平台擴展。
+- **Type Validation 型別驗證**：
+  - EN: Validate plugin types at load time to ensure interface compliance.
+  - 中文：載入時驗證型別，確保介面一致。
+
+```typescript
+// Example: Auto-discover plugins (Node.js, ESM)
+import { OutputFormatterFactory } from '../OutputFormatterFactory';
+import fs from 'fs';
+import path from 'path';
+const pluginDir = path.join(__dirname, './formatters');
+for (const file of fs.readdirSync(pluginDir)) {
+  if (file.endsWith('.js')) {
+    const { default: Formatter, platform } = require(path.join(pluginDir, file));
+    // Type guard example
+    if (typeof Formatter === 'function' && typeof platform === 'string') {
+      OutputFormatterFactory.register(platform, Formatter);
+    }
+  }
+}
+```
+
+---
+
+##### 4. Extensibility Best Practices | 擴展性最佳實踐
+
+- **Centralized Plugin Management 插件集中管理**：
+  - EN: Register plugins in a single location for maintainability.
+  - 中文：插件註冊集中管理，便於維護。
+- **Comprehensive Documentation 完整文件**：
+  - EN: Document all extension points and provide usage examples.
+  - 中文：所有擴展點需有文件與範例。
+- **Code Review & Automated Testing 代碼審查與自動化測試**：
+  - EN: All plugins must pass code review and automated tests.
+  - 中文：插件需經過審查與自動化測試。
+- **Bilingual Comments & Docs 雙語註解與說明**：
+  - EN: Use English and 中文 for all key comments and docs.
+  - 中文：重要註解與說明建議雙語。
+- **CI/CD Integration 持續整合/部署**：
+  - EN: Integrate plugin checks into CI/CD pipelines for quality assurance.
+  - 中文：將插件檢查納入 CI/CD 流程，確保品質。
+
+---
+
+##### 5. Common Pitfalls & Anti-Patterns | 常見失敗案例與反模式
+
+- **Tight Coupling 緊耦合**：
+  - EN: Avoid hardcoding plugin logic in core modules.
+  - 中文：避免在核心模組硬編碼插件邏輯。
+- **Lack of Type Safety 缺乏型別安全**：
+  - EN: Always use interfaces and type guards for plugin contracts.
+  - 中文：插件合約務必用 interface/type guard 保證型別安全。
+- **Missing Documentation 文件缺失**：
+  - EN: Incomplete docs hinder international collaboration.
+  - 中文：文件不全會阻礙國際協作。
+
+---
+
+##### 6. FAQ: Extensibility & Collaboration | 常見問答：擴展性與協作
+
+- **Q: How to add a new platform formatter? 如何新增平台格式化器？**
+  - EN: Implement the formatter, export as default, and register in the factory or auto-discovery folder.
+  - 中文：實作 formatter，export default，並註冊於工廠或自動發現目錄。
+- **Q: How to ensure plugin type safety? 如何確保插件型別安全？**
+  - EN: Use TypeScript interfaces, abstract classes, and runtime type guards.
+  - 中文：用 TypeScript interface/abstract class 與執行期 type guard。
+- **Q: How to support hot-reload for plugins? 如何支援插件熱插拔/動態 reload？**
+  - EN: Use file watchers and dynamic import to reload plugins at runtime.
+  - 中文：用檔案監聽與動態 import，實現執行期 reload。
+
+---
+
+> The API Gateway is designed for maximum extensibility, security, and internationalization. All best practices are recommended for production deployments.
+
+---
+
 ## commercialization-path
 
 ![main-card](images/junaikey-infinity-loop.svg)
@@ -660,31 +778,60 @@ CREATE TABLE ai_logs (
 
 ![card-illustration](images/junaikey-infinity-loop.svg)
 
-junai-key uses boostspace and supabase as dual cores to achieve bi-directional task/data sync, extensible to notion, aitables, capacities, and more.
+> **Section Overview**
+>
+> This section introduces the bi-core bidirectional sync center, which forms the foundation for multi-platform automation and data consistency in junai-key. The architecture is extensible to Notion, AITable, Capacities, and more. Both English and Chinese explanations are provided for clarity and international collaboration.
 
-### architecture-overview
+---
+
+### Architecture Overview
+
+#### English
+
+junai-key uses Boostspace and Supabase as dual cores to achieve robust, bidirectional task/data sync. The design is extensible to other platforms.
 
 ```mermaid
 graph TD
-    A[boostspace task change] --> B[webhook trigger]
-    B --> C[junai-key sync center]
-    C --> D[write to supabase]
-    E[supabase task/state change] --> F[trigger]
+    A[Boostspace Task Change] --> B[Webhook Trigger]
+    B --> C[Junai-Key Sync Center]
+    C --> D[Write to Supabase]
+    E[Supabase Task/State Change] --> F[Trigger]
     F --> C
-    C --> G[write back to boostspace]
-    C --> H[prevent sync loop: state/version check]
+    C --> G[Write Back to Boostspace]
+    C --> H[Prevent Sync Loop: State/Version Check]
 ```
 
-### main-technical-modules
+#### 中文
 
-- `sync/boostspace-webhook-handler.ts`: receives boostspace webhook, parses task changes, pushes to supabase
-- `sync/supabase-trigger-handler.ts`: monitors supabase data changes, writes back to boostspace
-- `sync/state-version-guard.ts`: state comparison and sync loop prevention
-- `integration/field-mapping.yaml`: field mapping table, supports multi-platform field standardization
+junai-key 以 Boostspace 與 Supabase 為雙核心，實現多平台任務/資料雙向同步，架構可延伸至 Notion、AITable、Capacities 等。
 
-### typescript framework example
+```mermaid
+graph TD
+    A[Boostspace 任務變更] --> B[Webhook 觸發]
+    B --> C[Junai-Key 同步中心]
+    C --> D[寫入 Supabase]
+    E[Supabase 任務/狀態變更] --> F[觸發]
+    F --> C
+    C --> G[回寫 Boostspace]
+    C --> H[循環防呆：狀態/版本檢查]
+```
 
-```ts
+---
+
+### Main Technical Modules
+
+| Module File                          | Description (EN)                                         | 說明（中文）                        | Key Responsibilities (EN)                                   | 主要職責（中文）                      |
+|--------------------------------------|----------------------------------------------------------|-------------------------------------|-------------------------------------------------------------|---------------------------------------|
+| sync/boostspace-webhook-handler.ts   | Receives Boostspace webhook, parses task changes, pushes to Supabase | 接收 Boostspace webhook，解析任務變更，推送至 Supabase | 1. Listen to Boostspace webhooks<br>2. Parse and map task data<br>3. Upsert to Supabase | 1. 監聽 Boostspace webhook<br>2. 解析並映射任務資料<br>3. 寫入 Supabase |
+| sync/supabase-trigger-handler.ts     | Monitors Supabase data changes, writes back to Boostspace | 監控 Supabase 資料變更，回寫 Boostspace | 1. Watch Supabase triggers<br>2. Parse and map task data<br>3. Update Boostspace | 1. 監控 Supabase 觸發器<br>2. 解析並映射任務資料<br>3. 回寫 Boostspace |
+| sync/state-version-guard.ts          | State comparison and sync loop prevention                 | 狀態比對與循環防呆                   | 1. Compare state/version fields<br>2. Prevent sync loops<br>3. Mark sync source | 1. 比對狀態/版本欄位<br>2. 防止同步循環<br>3. 標記同步來源 |
+| integration/field-mapping.yaml       | Field mapping table, supports multi-platform field standardization | 欄位對應表，支援多平台欄位標準化         | 1. Define cross-platform field mapping<br>2. Enable extensibility | 1. 定義跨平台欄位對應<br>2. 支援擴展性 |
+
+---
+
+### TypeScript Framework Example
+
+```typescript
 // sync/boostspace-webhook-handler.ts
 import { upsertTaskToSupabase } from './supabase-client';
 import { parseBoostTask } from './field-mapping';
@@ -704,7 +851,9 @@ export async function handleSupabaseTrigger(payload: any) {
 }
 ```
 
-### field-mapping-yaml (integration/field-mapping.yaml)
+---
+
+### Field Mapping YAML (integration/field-mapping.yaml)
 
 ```yaml
 boostspace:
@@ -719,192 +868,25 @@ supabase:
   due_date: due_date
 ```
 
-<!-- 中文說明區塊：-->
+---
+
+#### 中文說明
 
 > 雙核心雙向同步中心是 junai-key 多平台自動化與資料一致性的基石，架構可延伸至 Notion、AITable、Capacities 等。
 
-### 同步循環防呆邏輯（sync-loop-prevention-logic）
+---
 
-- 每次同步時，會比對 `updated_at` 或 `version` 欄位，僅在狀態變更時才觸發寫入。
-- 寫入時標記來源（如 `source: boostspace` 或 `source: supabase`），避免重複觸發。
+### Sync Loop Prevention Logic
+
+| 步驟 | 邏輯說明（中文）                                  | Logic (EN)                                         |
+|------|--------------------------------------------------|----------------------------------------------------|
+| 1    | 每次同步時，比對 `updated_at` 或 `version` 欄位   | Compare `updated_at` or `version` before syncing   |
+| 2    | 寫入時標記來源（如 `source: boostspace`）         | Mark source (e.g., `source: boostspace`)           |
+| 3    | 僅在狀態變更時才觸發寫入，避免重複觸發             | Only trigger write on state change, avoid loops    |
 
 ---
 
-## dual-core-sync-integration-center-and-agent-group
-
-![card-illustration](images/junaikey-infinity-loop.svg)
-
-### architecture-overview
-
-```mermaid
-flowchart TD
-    A[dual-core sync integration center] --> B[agent group]
-    B --> C[task sync]
-    B --> D[data sync]
-    C --> E[boostspace]
-    D --> F[supabase]
-    E <--> F
-    B --> G[sync loop prevention]
-```
-
-<!-- language: zh-tw -->
-```mermaid
-flowchart TD
-    A[雙核心同步整合中心] --> B[代理群]
-    B --> C[任務同步]
-    B --> D[資料同步]
-    C --> E[Boostspace]
-    D --> F[Supabase]
-    E <--> F
-    B --> G[循環防呆機制]
-```
-
-### technical-overview
-
-The dual-core sync integration center coordinates agent groups to achieve robust, extensible, and loop-safe bi-directional synchronization between platforms (e.g., Boostspace, Supabase, Notion, Capacities). Each agent in the group is responsible for a specific sync task, with built-in state/version checks to prevent infinite loops and data conflicts.
-
-<!-- language: zh-tw -->
-雙核心同步整合中心協調代理群，實現多平台（如 Boostspace、Supabase、Notion、Capacities）間的高擴展性、循環防呆的雙向同步。每個代理負責特定同步任務，並內建狀態/版本比對，防止無限循環與資料衝突。
-
-### extensibility-and-design
-
-- Modular agent group: Each agent can be extended or replaced for new platforms.
-- Sync loop prevention: All sync operations include source marking and version/state comparison.
-- Centralized integration: The center manages agent orchestration, error handling, and cross-platform mapping.
-
-<!-- language: zh-tw -->
-- 模組化代理群：每個代理可擴充或替換以支援新平台。
-- 循環防呆：所有同步操作皆標記來源並比對版本/狀態。
-- 集中式整合：中心負責代理協調、錯誤處理與跨平台欄位對應。
-
-### agent-group-design-example
-
-```mermaid
-flowchart TD
-    subgraph IntegrationCenter
-        direction TB
-        A1[BoostspaceAgent]
-        A2[SupabaseAgent]
-        A3[NotionAgent]
-        A4[CapacitiesAgent]
-    end
-    IntegrationCenter --> B[SyncCoordinator]
-    B --> C[SyncLoopGuard]
-    B --> D[FieldMapper]
-```
-
-<!-- language: zh-tw -->
-```mermaid
-flowchart TD
-    subgraph 整合中心
-        direction TB
-        A1[Boostspace代理]
-        A2[Supabase代理]
-        A3[Notion代理]
-        A4[Capacities代理]
-    end
-    整合中心 --> B[同步協調器]
-    B --> C[循環防呆]
-    B --> D[欄位對應器]
-```
-
-### typescript-agent-group-example
-
-```ts
-// agent-group.ts
-export interface SyncAgent {
-  name: string;
-  sync(payload: any): Promise<void>;
-}
-
-export class BoostspaceAgent implements SyncAgent {
-  name = 'boostspace';
-  async sync(payload: any) {
-    // implement boostspace sync logic
-  }
-}
-
-export class SupabaseAgent implements SyncAgent {
-  name = 'supabase';
-  async sync(payload: any) {
-    // implement supabase sync logic
-  }
-}
-
-export class SyncCoordinator {
-  agents: SyncAgent[];
-  constructor(agents: SyncAgent[]) {
-    this.agents = agents;
-  }
-  async syncAll(payload: any) {
-    for (const agent of this.agents) {
-      await agent.sync(payload);
-    }
-  }
-}
-```
-
-<!-- language: zh-tw -->
-```ts
-// agent-group.ts
-export interface SyncAgent {
-  name: string;
-  sync(payload: any): Promise<void>;
-}
-
-export class BoostspaceAgent implements SyncAgent {
-  name = 'boostspace';
-  async sync(payload: any) {
-    // 實作 boostspace 同步邏輯
-  }
-}
-
-export class SupabaseAgent implements SyncAgent {
-  name = 'supabase';
-  async sync(payload: any) {
-    // 實作 supabase 同步邏輯
-  }
-}
-
-export class SyncCoordinator {
-  agents: SyncAgent[];
-  constructor(agents: SyncAgent[]) {
-    this.agents = agents;
-  }
-  async syncAll(payload: any) {
-    for (const agent of this.agents) {
-      await agent.sync(payload);
-    }
-  }
-}
-```
-
-### sync-loop-prevention-logic
-
-- Each sync operation checks the `version` or `updated_at` field before writing.
-- Source marking (e.g., `source: boostspace` or `source: supabase`) is used to avoid redundant triggers.
-- The SyncCoordinator ensures that only changed data is propagated, preventing infinite loops.
-
-<!-- language: zh-tw -->
-- 每次同步前比對 `version` 或 `updated_at` 欄位。
-- 寫入時標記來源（如 `source: boostspace` 或 `source: supabase`），避免重複觸發。
-- 同步協調器僅傳遞變更資料，防止無限循環。
-
----
-
-> 本區塊由 AI 代理自動整理，將隨開發進度與願景持續更新。
-
----
-
-> 若需保留原始中文名稱與說明，可將其移至 SPEC.md 或其他文件備查。
-
----
-
-> dual-core bi-directional sync center forms the foundation for junai-key's multi-platform automation and data consistency, extensible to notion, aitables, capacities, and more.
-
----
-
-> this section is auto-curated by ai agents and will be continuously updated according to development progress and vision.
+> This section is auto-curated by AI agents and will be continuously updated according to development progress and vision.
 
 ---
 
