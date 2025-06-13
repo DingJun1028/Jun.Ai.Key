@@ -1,0 +1,20 @@
+<svg width="480" height="220" viewBox="0 0 480 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="loopGradient" x1="0" y1="110" x2="480" y2="110" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6EE7B7"/>
+      <stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="140" cy="110" rx="120" ry="60" stroke="url(#loopGradient)" stroke-width="16" fill="none"/>
+  <ellipse cx="340" cy="110" rx="120" ry="60" stroke="url(#loopGradient)" stroke-width="16" fill="none"/>
+  <text x="60" y="60" font-size="18" fill="#10B981">任務分解</text>
+  <text x="60" y="170" font-size="18" fill="#10B981">技能組合</text>
+  <text x="200" y="30" font-size="18" fill="#3B82F6">知識召喚</text>
+  <text x="370" y="60" font-size="18" fill="#6366F1">決策鍊金</text>
+  <text x="370" y="170" font-size="18" fill="#6366F1">符文組合</text>
+  <text x="200" y="200" font-size="18" fill="#F59E42">圈層協調</text>
+  <circle cx="140" cy="110" r="18" fill="#F59E42"/>
+  <circle cx="340" cy="110" r="18" fill="#F59E42"/>
+  <text x="128" y="116" font-size="14" fill="#fff">知</text>
+  <text x="328" y="116" font-size="14" fill="#fff">能</text>
+</svg>

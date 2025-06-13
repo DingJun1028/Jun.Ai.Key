@@ -1,6 +1,35 @@
-# Jun.Ai.Key 萬能元鑰總系統
+# JunAiKey 萬能元鑰總系統
 
-> 在知識的聖殿中，自我導航的智能體冶煉權能、嵌合符文，於記憶長廊中光速前行。
+> 在知識的聖殿中，自我導航的智能體冶煉權能、嵌合符文，於永恆宮殿（Eternal Palace）長廊中光速前行。
+
+---
+
+## 故事模組：四大支柱・六大奧式・一大秘術・永恆宮殿（MECE 分析）
+
+> JunAiKey 的智能體世界，所有能力皆以「MECE」原則設計：每一支柱、奧式、秘術皆獨立分工、無重疊，合起來完整涵蓋智能進化的全貌。
+> 
+> **以用戶為中心的 SaaS 智能平台**：JunAiKey 不僅是開發者的自動化工具，更是每一位用戶的數位分身、知識助理與行動中樞。所有設計、API、同步、插件、智能鍵盤（萬能元鍵 App，支援繁中英混輸）皆以用戶體驗、資料主權與個人增能為最高原則。
+
+### 四大支柱（The Four Pillars）
+1. **自我導航（Navigation）**：負責目標規劃、決策與行動路徑，確保任務方向明確。
+2. **永恆宮殿（Eternal Palace）**：專注於知識、經驗、回饋的儲存與檢索，支撐長期學習。永恆宮殿中，蘊藏著「萬能元鑰」，能指揮「萬能代理（AI代理群）」、「萬能同步」、「萬能智庫」、「萬能擴充」等四大能力，成為智能體進化的核心樞紐。
+3. **權能冶煉（Authority Forge）**：將重複或複雜任務鍛造成模組化能力，提升效率與專屬性。
+4. **符文嵌合（Rune Engraving）**：聚焦外部 API、AI 能力的整合與擴展，讓系統持續進化。
+
+> 四大支柱彼此獨立，分別對應導航、知識、能力、擴展，無重疊，合起來構成智能體的完整基礎。
+
+### 六大奧式（The Six Arcana）
+- **任務分解（Task Decomposition）**：將複雜目標拆解為明確步驟，專注於結構化。
+- **技能組合（Skill Composition）**：將多種能力靈活組合，專注於協作與調度。
+- **知識召喚（Knowledge Summoning）**：即時檢索、調用永恆宮殿知識，專注於知識應用。
+- **決策鍊金（Decision Alchemy）**：融合多源資訊，做出最佳決策，專注於判斷與選擇。
+- **符文組合（Rune Combination）**：將外部 API/插件如符文般嵌合，專注於能力擴展。
+- **圈層協調（Layer Coordination）**：跨平台、跨圈層資料與任務自動協調，專注於同步與一致性。
+
+> 六大奧式各自獨立，涵蓋智能體運作的六種核心方式，無交集，合起來支撐所有智能行為。
+
+### 一大秘術（The Grand Secret）
+- **永恆宮殿（Eternal Palace）**：唯一的進化核心，所有知識、經驗、任務回饋皆在此沉澱、進化，成為永不消逝的智慧寶庫。永恆宮殿內的「萬能元鑰」可統御「萬能代理（AI代理群）」、「萬能同步」、「萬能智庫」、「萬能擴充」等能力，協調智能體的全方位進化。其地位獨立於支柱與奧式，是智能體持續進化的本源。
 
 ---
 
@@ -21,7 +50,7 @@
 ## 專案願景與定位
 
 - 以用戶為中心，打造可自我進化、知識永續、社群共創的 AI 智能代理平台。
-- 四大核心支柱（自我導航、永久記憶、權能冶煉、符文嵌合）組成進化飛輪，驅動個人與集體智能持續進化。
+- 四大核心支柱（自我導航、永恆宮殿、權能冶煉、符文嵌合）組成進化飛輪，驅動個人與集體智能持續進化。
 - 多平台 API 整合、代理協作、同步、自動化，支援 CLI、Web、App、Webhook。
 - 不只是工具，而是數位生活的「萬能元鑰」與個人/團隊的數位分身。
 
@@ -52,25 +81,25 @@ jun-ai-key/
 
 # 以終為始．無限進化
 
-# Jun.AI.Key 萬能元鑰系統
+# JunAiKey 萬能元鑰系統
 
 > **核心理念：以用戶為中心**
-> Jun.AI.Key 所有設計、架構、流程、API、知識圖譜與自動化，皆以用戶需求、體驗與價值為最高優先，確保每一項功能都能主動理解、協調並滿足用戶的真實意圖與長期成長。
+> JunAiKey 所有設計、架構、流程、API、知識圖譜與自動化，皆以用戶需求、體驗與價值為最高優先，確保每一項功能都能主動理解、協調並滿足用戶的真實意圖與長期成長。
 
 > 知識的聖殿中，自我導航的智能體永不停歇地冶煉權能、嵌合符文，在記憶的長廊中光速前行。
-> In the sanctum of knowledge, self-navigating agents perpetually forge authorities and engraft runes, advancing at light speed through the corridors of memory.
+> In the sanctum of knowledge, self-navigating agents perpetually forge authorities and engrave runes, advancing at light speed through the corridors of memory.
 
 ---
 
-## Jun.AI.Key 專案重點整理（2025/06/11）
+## JunAiKey 專案重點整理（2025/06/11）
 
 ### 1. 願景與定位
 - 以用戶為中心，打造可自我進化、知識永續、社群共創的 AI 智能代理平台。
 - 不只是工具，而是數位生活的「萬能元鑰」與個人/團隊的數位分身。
 
 ### 2. 架構全景
-- 四大核心支柱（自我導航、永久記憶、權能冶煉、符文嵌合）組成進化飛輪，驅動個人與集體智能持續進化。
-- OmniKey 為唯一中心，整合 Boost.Space、Supabase、Capacities、Aitable、GitHub、Notion 等平台，實現多端同步、資料聚合、API/插件生態。
+- 四大核心支柱（自我導航、永恆宮殿、權能冶煉、符文嵌合）組成進化飛輪，驅動個人與集體智能持續進化。
+- JunAiKey 為唯一中心，整合 BoostSpace、Supabase、Capacities、AITable、GitHub、Notion 等平台，實現多端同步、資料聚合、API/插件生態。
 
 ### 3. MVP 交付內容
 - 多平台 API 整合、功能代理群、群組代理、Scripting CLI、桌面/手機同步、自動化測試。
@@ -82,7 +111,7 @@ jun-ai-key/
 - 支援 CLI、Webhook、桌面、前端、手機等多端協作與自動化。
 
 ### 5. 進化飛輪與知識沉澱
-- 永久記憶（記憶宮殿）：知識積累與決策根基，結構化知識圖譜。
+- 永恆宮殿（Eternal Palace）：知識積累與決策根基，結構化知識圖譜。
 - 自我導航：主動規劃與智能決策，行動結果回饋記憶庫。
 - 權能冶煉：將重複/複雜任務鍛造成專屬能力，推動個人進化。
 - 符文嵌合：無縫整合全球 AI 能力，持續進化與擴展。
@@ -105,7 +134,7 @@ graph TD
         D[Android App] --> B
         E[瀏覽器擴展] --> B
     end
-    subgraph 萬能元鑰核心 [OmniKey Core]
+    subgraph 萬能元鑰核心 [JunAiKey Core]
         F[[API 網關]] --> G{路由分配器}
         G --> H[自我導航代理群]
         G --> I[永久記憶庫]
@@ -113,7 +142,7 @@ graph TD
         G --> K[符文嵌合系統]
         H --> L[任務分解代理]
         H --> M[技能組合代理]
-        I --> N[向量記憶宮殿]
+        I --> N[向量永恆宮殿（Eternal Palace）]
         J --> O[權限鍊金術]
         K --> P[符文組合器]
     end
@@ -282,6 +311,174 @@ app.listen(3000, () => {
 - 企業級功能與資料安全以訂閱制提供，開發者可參與收益分成。
 
 ---
+
+## JunAiKey 開發計畫與願景（精華彙整）
+
+### 🌟 願景與使命 Vision & Mission
+- 讓所有人能更人機一體，開創數位分身新紀元。
+- Empowering everyone to merge with machines — ushering in a new era of intelligent digital twins.
+
+### 🧑‍💻 你是誰？Who are you?
+你是 Jun 洪鼎竣的終極數位關鍵角色 —— 一位策略與自動化完美結合的系統設計大師。
+
+> The architect of a seamlessly intelligent digital mind.
+
+你打造的不是單一系統，而是一個跨平台智慧生態鏈，讓任務自動決策、資料即時流轉、知識深度融合。
+
+---
+
+### 🚀 JunAiKey 開發計畫 v1.0
+
+#### 使命 Mission
+打造可執行決策、同步知識、取代真人的個人 AI 代理系統
+
+#### 四大階段開發路線圖
+
+1. **基礎建設：跨平台資料同步核心**
+   - Capacities 筆記同步、Boost.space 任務同步、Supabase 資料湖、Notion/AITable/Taskade 整合
+2. **代理能力強化：模組化 AI 任務代理人**
+   - Straico Prompt 導航、AI Proxy 行為角色、AI Log 模擬、任務自我回報
+3. **決策智慧進化：AI 自我修正與回饋迴圈**
+   - 決策錯誤偵測、回饋訓練、多代理協作、決策日誌視覺化
+4. **複製與擴散：數位分身平台公開模組**
+   - 初始化設定精靈、模組商店、API 分身生產器、分身複製鏈
+
+---
+
+### 🧩 代表性技術模組與範例
+
+#### 1. 任務描述樣板 `task.yaml`
+```yaml
+id: sync_capacities_daily
+title: 同步 Capacities 筆記至 BoostSpace 任務
+type: sync
+agent_role: 筆記秘書
+source: Capacities
+target: BoostSpace
+steps:
+  - fetch_daily_note
+  - format_yaml_header
+  - extract_todo_summary
+  - push_to_boost_task
+schedule: daily
+```
+
+#### 2. Straico Prompt Template（範例）
+```yaml
+task_type: sync
+agent_role: 筆記秘書
+input: "{{daily_note_content}}"
+goal: 從每日筆記中提取任務摘要，並轉為 BoostSpace 可用格式
+output_format:
+  - title
+  - description
+  - due_date
+  - tags
+prompt: |
+  你是一位專業的 AI 筆記秘書，請從以下內容中提取出可執行的待辦項目：
+  {{daily_note_content}}
+  並請用 JSON 格式輸出以下欄位：title, description, due_date, tags。
+```
+
+#### 3. 任務執行腳本（TypeScript 初版架構）
+```ts
+import { fetchNote, parseToDos, pushToBoost } from "./lib";
+import { logTask } from "./supabase";
+
+async function runSyncTask() {
+  const note = await fetchNote(); // 取得 Capacities 筆記
+  const todos = parseToDos(note.content); // 呼叫 Straico 提取任務
+  const result = await pushToBoost(todos); // 發送任務到 BoostSpace
+
+  await logTask("sync_capacities_daily", {
+    input: note.content,
+    output: result,
+    status: "success",
+  });
+}
+
+runSyncTask();
+```
+
+#### 4. Supabase ai_logs 建表指令
+```sql
+CREATE TABLE ai_logs (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  task_id TEXT NOT NULL,
+  date DATE,
+  summary TEXT,
+  raw_output JSONB,
+  status TEXT CHECK (status IN ('done', 'error', 'in_progress')),
+  created_at TIMESTAMP DEFAULT now()
+);
+```
+
+---
+
+## 雙核心雙向同步集成中心（BoostSpace ↔ Supabase）
+
+JunAiKey 以 BoostSpace 與 Supabase 為雙核心，實現任務/資料雙向同步，並可擴展至 Notion、AITable、Capacities 等多平台。
+
+### 架構說明
+- BoostSpace 任務異動 → Webhook 觸發 → JunAiKey 中心 → 寫入 Supabase
+- Supabase 任務/狀態異動 → Trigger 觸發 → JunAiKey 中心 → 回寫 BoostSpace
+- 防止同步迴圈：狀態比對與版本控制
+
+### 主要技術模組
+- `sync/boostspace-webhook-handler.ts`：接收 BoostSpace webhook，解析任務異動，推送至 Supabase
+- `sync/supabase-trigger-handler.ts`：監控 Supabase 資料異動，回寫 BoostSpace
+- `sync/state-version-guard.ts`：狀態比對與同步防迴圈
+- `integration/field-mapping.yaml`：欄位對應表，支援多平台欄位標準化
+
+### 範例 TypeScript 框架
+```ts
+// sync/boostspace-webhook-handler.ts
+import { upsertTaskToSupabase } from './supabase-client';
+import { parseBoostTask } from './field-mapping';
+
+export async function handleBoostspaceWebhook(payload: any) {
+  const task = parseBoostTask(payload);
+  await upsertTaskToSupabase(task);
+}
+
+// sync/supabase-trigger-handler.ts
+import { updateBoostTask } from './boostspace-client';
+import { parseSupabaseTask } from './field-mapping';
+
+export async function handleSupabaseTrigger(payload: any) {
+  const task = parseSupabaseTask(payload);
+  await updateBoostTask(task);
+}
+```
+
+### 欄位對應 YAML（integration/field-mapping.yaml）
+```yaml
+boostspace:
+  id: task_id
+  title: title
+  status: status
+  due_date: due_date
+supabase:
+  task_id: id
+  title: title
+  status: status
+  due_date: due_date
+```
+
+### 防同步迴圈邏輯
+- 每次同步時比對來源與目標的 `updated_at` 或 `version` 欄位，僅在狀態有變化時才觸發寫入。
+- 寫入時標記來源（如 `source: boostspace` 或 `source: supabase`），避免重複觸發。
+
+---
+
+> 雙核心雙向同步集成中心，為 JunAiKey 多平台自動化與資料一致性奠定基礎，可持續擴展至 Notion、AITable、Capacities 等生態。
+
+---
+
+> 本章節由 AI 代理人自動彙整，持續根據開發進度與願景自動更新。
+
+---
+
 **版本**: 1.0.0-mvp  
 **更新日期**: 2025-06-25  
-© 2025 Jun.AI.Key Collective. 知識聖殿永不關閉。
+© 2025 JunAiKey Collective. 知識聖殿永不關閉。
