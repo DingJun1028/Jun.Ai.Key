@@ -1,4 +1,7 @@
-// 路由分配器（Orchestrator）
+/**
+ * 路由分配器（Orchestrator）
+ * 負責根據 action 分配任務至對應子系統。
+ */
 export interface RouteTask {
   userId: string;
   action: string;
@@ -6,8 +9,12 @@ export interface RouteTask {
 }
 
 export class Orchestrator {
+  /**
+   * 根據 action 分配到不同引擎
+   * @param task RouteTask 任務物件
+   * @returns string 對應子系統名稱
+   */
   route(task: RouteTask): string {
-    // 根據 action 分配到不同引擎
     switch (task.action) {
       case 'forgeAuthority':
         return 'AuthorityForgeEngine';

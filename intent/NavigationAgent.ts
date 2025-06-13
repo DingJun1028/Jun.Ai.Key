@@ -1,4 +1,7 @@
-// 自我導航代理群 (Self-Navigating Agent Swarm)
+/**
+ * 自我導航代理群（Self-Navigating Agent Swarm）
+ * 根據任務與記憶自動規劃與執行多步驟任務。
+ */
 import { MemoryPalace, Context } from '../knowledge/MemoryPalace';
 
 // 型別定義
@@ -25,6 +28,11 @@ export interface Plan {
 export class NavigationAgent {
   constructor(private memory: MemoryPalace) {}
 
+  /**
+   * 執行一個任務，根據記憶自動規劃與執行多步驟
+   * @param task 任務描述
+   * @returns Promise<Result>
+   */
   async executeTask(task: Task): Promise<Result> {
     const context = await this.memory.retrieveContext(task.userId);
     const plan = await this.createPlan(task, context);
@@ -38,6 +46,12 @@ export class NavigationAgent {
     return plan.compileFinalResult();
   }
 
+  /**
+   * 使用 LLM 產生任務執行計畫
+   * @param task 任務
+   * @param context 記憶內容
+   * @returns Promise<Plan>
+   */
   private async createPlan(task: Task, context: Context): Promise<Plan> {
     // 使用LLM生成任務執行計劃
     const llmResponse = await LLMClient.generatePlan({

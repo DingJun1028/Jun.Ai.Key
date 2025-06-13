@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { NavigationAgent } from '../intent/NavigationAgent';
 import { MemoryPalace } from '../knowledge/MemoryPalace';
 import { apiGateway } from '../orchestration/api-gateway';
+import './styles/light.css';
 
 // 四大核心支柱說明
 const pillars = [
@@ -59,8 +60,10 @@ export default function App() {
   };
 
   return (
-    <div style={{ fontFamily: 'sans-serif', padding: 32, maxWidth: 700, margin: 'auto' }}>
+    <div className="app-container" style={{ fontFamily: 'sans-serif', padding: 32, maxWidth: 700, margin: 'auto' }}>
       <h1>Jun.AI.Key 萬能元鑰系統</h1>
+      <p>歡迎使用！請於左側選單選擇功能。</p>
+      {/* 可擴充：代理群、知識檢索、任務執行等元件 */}
       <h2>四大核心支柱</h2>
       <ul>
         {pillars.map(p => (

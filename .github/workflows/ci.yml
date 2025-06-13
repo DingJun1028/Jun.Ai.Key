@@ -9,9 +9,9 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 20.x
@@ -19,27 +19,71 @@ jobs:
         with:
           node-version: 20.x
           cache: 'npm'
-      - name: Cache node modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm ci
       - name: Check formatting
-        run: npm run format -- --check
+        run: timeout 60 npm run format -- --check
       - name: Lint
-        run: npm run lint
-      - name: Security Audit
-        run: npm audit --omit=dev || true
+        run: timeout 60 npm run lint
       - name: Type Check
-        run: tsc --noEmit
+        run: timeout 60 tsc --noEmit
+      - name: Docs Check
+        run: timeout 60 diff README.md docs/CONTRIBUTING.md || echo "README 與 CONTRIBUTING.md 有差異，請同步內容。"
+      - name: API Docs Check
+        run: timeout 60 diff docs/API_LIBRARY.md docs/API_LIBRARY.yaml || echo "API 文件與 YAML 有差異，請同步內容。"
+      - name: FAQ Check
+        run: timeout 60 test -s docs/FAQ.md || echo "FAQ.md 不可為空，請補充常見問題。"
+      - name: Spec Check
+        run: timeout 60 test -s docs/SPEC.md || echo "SPEC.md 不可為空，請補充產品規格。"
+
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Security Audit
+        run: timeout 60 npm audit --omit=dev || true
+      - name: Dependency Check
+        run: timeout 60 npx depcheck || true
+
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [lint, security]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
       - name: Build
-        run: npm run build
+        run: timeout 180 npm run build
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
       - name: Test
-        run: npm test -- --coverage
+        run: timeout 180 npm test -- --coverage
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
@@ -50,3 +94,6 @@ jobs:
         with:
           name: test-results
           path: coverage/
+      - name: Bundle Analysis
+        if: github.event_name == 'push'
+        run: timeout 120 npx webpack --profile --json > stats.json && npx webpack-bundle-analyzer stats.json --mode static --no-open || true

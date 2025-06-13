@@ -36,5 +36,13 @@ jobs:
           node-version: 20.x
       - name: Install Supabase CLI
         run: npm install -g supabase
+      - name: Check Supabase CLI Version
+        run: supabase --version
+      - name: List Supabase Functions
+        run: supabase functions list --project-ref ${{ secrets.SUPABASE_PROJECT_REF }} --token ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      - name: Check Supabase Secrets Existence
+        run: |
+          if [ -z "${{ secrets.SUPABASE_PROJECT_REF }}" ]; then echo "SUPABASE_PROJECT_REF is NOT set"; else echo "SUPABASE_PROJECT_REF is set"; fi
+          if [ -z "${{ secrets.SUPABASE_ACCESS_TOKEN }}" ]; then echo "SUPABASE_ACCESS_TOKEN is NOT set"; else echo "SUPABASE_ACCESS_TOKEN is set"; fi
       - name: Deploy to Supabase Edge Functions
-        run: supabase functions deploy --project-ref ${{ secrets.SUPABASE_PROJECT_REF }} --token ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: supabase functions deploy --project-ref ${{ secrets.SUPABASE_PROJECT_REF }} --token ${{ secrets.SUPABASE_ACCESS_TOKEN }} --debug
