@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 // 導入核心模組
 import { NavigationAgent } from '../intent/NavigationAgent'
 import { MemoryPalace } from '../knowledge/MemoryPalace'
+import { BindAiAgent } from '../integration/bindai.agent'
 import './styles/light.css'
 
 // 四大核心支柱說明
@@ -52,6 +53,10 @@ export default function App() {
     { success: false }
   ])
   const [loading, setLoading] = useState(false)
+  // 新增一個 BindAiAgent 實例
+  const [bindAiResult, setBindAiResult] = useState<string>('')
+  const [bindAiLoading, setBindAiLoading] = useState(false)
+  const bindAiAgent = new BindAiAgent(process.env.BINDAI_API_KEY, 'zh-tw')
 
   // 初始化三個代理與記憶庫
   const memoryPalaces = [
@@ -103,12 +108,26 @@ export default function App() {
     }
   }
 
+  // 新增一個處理 BindAi 輸入的函式
+  const handleBindAi = async () => {
+    setBindAiLoading(true)
+    setBindAiResult('')
+    try {
+      const result = await bindAiAgent.execute({ prompt: task })
+      setBindAiResult(result.output)
+    } catch (e) {
+      setBindAiResult(e instanceof Error ? e.message : String(e))
+    } finally {
+      setBindAiLoading(false)
+    }
+  }
+
   return (
-    <div className="app-container" style={{ fontFamily: 'sans-serif', padding: 32, maxWidth: 700, margin: 'auto' }}>
+    <div className="app-container">
       <h1>Jun.AI.Key 萬能元鑰系統</h1>
       <p>歡迎使用！請於左側選單選擇功能。</p>
       <h2>四大核心支柱</h2>
-      <ul>
+      <ul className="pillar-list">
         {pillars.map(p => (
           <li key={p.title}>
             <strong>{p.title}：</strong>{p.desc}
@@ -116,34 +135,41 @@ export default function App() {
         ))}
       </ul>
       <h3>多代理協作互動</h3>
-      <div style={{ marginBottom: 16 }}>
-        <label>
+      <div className="agent-section">
+        <label className="input-label">
           用戶ID：
-          <input value={userId} onChange={e => setUserId(e.target.value)} style={{ marginLeft: 8 }} />
+          <input value={userId} onChange={e => setUserId(e.target.value)} />
         </label>
-      </div>
-      <div style={{ marginBottom: 16 }}>
-        <label>
+        <label className="input-label">
           任務描述：
-          <input value={task} onChange={e => setTask(e.target.value)} style={{ marginLeft: 8, width: 300 }} />
+          <input className="input-task" value={task} onChange={e => setTask(e.target.value)} />
         </label>
+        <button className="btn" onClick={handleExecute} disabled={loading}>
+          {loading ? '執行中...' : '三代理同時執行任務'}
+        </button>
       </div>
-      <button onClick={handleExecute} disabled={loading} style={{ padding: '8px 24px' }}>
-        {loading ? '執行中...' : '三代理同時執行任務'}
-      </button>
       <h4>三代理執行結果</h4>
-      <div style={{ display: 'flex', gap: 16 }}>
+      <div className="agent-results">
         {results.map((r, i) => (
-          <pre key={i} style={{ background: '#f6f8fa', padding: 16, borderRadius: 8, minHeight: 80, flex: 1 }}>
-            <b>代理 {i + 1}</b>\n
+          <pre key={i} className="agent-result">
+            <b>代理 {i + 1}</b>{'\n'}
             {r.success
-              ? <span style={{ color: '#228B22' }}>✅ 成功\n{JSON.stringify(r.data, null, 2)}</span>
-              : <span style={{ color: '#d32f2f' }}>❌ 失敗\n{r.error}</span>
+              ? <span className="agent-result-success">✅ 成功\n{JSON.stringify(r.data, null, 2)}</span>
+              : <span className="agent-result-fail">❌ 失敗\n{r.error}</span>
             }
           </pre>
         ))}
       </div>
       <hr />
+      <h3>BindAi 直接互動（TypeScript 服務整合）</h3>
+      <div className="bindai-section">
+        <button className="btn" onClick={handleBindAi} disabled={bindAiLoading}>
+          {bindAiLoading ? '執行中...' : '呼叫 BindAi 服務'}
+        </button>
+        <div className={bindAiResult ? 'bindai-output' : 'bindai-output empty'}>
+          {bindAiResult ? <pre>{bindAiResult}</pre> : '點擊上方按鈕，直接用 TypeScript 呼叫 BindAi'}
+        </div>
+      </div>
       <h3>進化飛輪</h3>
       <ol>
         <li>用戶互動</li>
@@ -152,7 +178,7 @@ export default function App() {
         <li>自動化協作</li>
         <li>能力進化</li>
       </ol>
-      <p style={{ color: '#888', fontSize: 14 }}>© 2025 Jun.AI.Key Collective</p>
+      <p className="copyright">© 2025 Jun.AI.Key Collective</p>
     </div>
   )
 }

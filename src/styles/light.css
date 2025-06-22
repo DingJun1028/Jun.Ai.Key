@@ -1,0 +1,80 @@
+/* JunAI Key App 樣式 - 將原本 inline style 移至此處 */
+
+.app-container {
+  font-family: sans-serif;
+  padding: 32px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.pillar-list {
+  margin-bottom: 24px;
+}
+
+.pillar-list li {
+  margin-bottom: 8px;
+}
+
+.agent-section,
+.bindai-section {
+  margin-bottom: 16px;
+}
+
+.input-label {
+  margin-bottom: 16px;
+  display: block;
+}
+
+.input-label input {
+  margin-left: 8px;
+}
+
+.input-task {
+  width: 300px;
+}
+
+.btn {
+  padding: 8px 24px;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.agent-results {
+  display: flex;
+  gap: 16px;
+}
+
+.agent-result {
+  background: #f6f8fa;
+  padding: 16px;
+  border-radius: 8px;
+  min-height: 80px;
+  flex: 1;
+}
+
+.agent-result-success {
+  color: #228B22;
+}
+
+.agent-result-fail {
+  color: #d32f2f;
+}
+
+.copyright {
+  color: #888;
+  font-size: 14px;
+}
+
+.bindai-output {
+  margin-top: 8px;
+  min-height: 40px;
+  color: #333;
+}
+
+.bindai-output.empty {
+  color: #888;
+}

@@ -890,6 +890,388 @@ supabase:
 
 ---
 
-**version**: 1.0.0-mvp  
-**last updated**: 2025-06-25  
+#### Advanced Plugin Development | 進階插件開發（全方位強化）
+
+##### 1. Plugin Lifecycle Management | 插件生命週期管理
+
+- **EN:** Support dynamic loading, unloading, hot-reloading, and versioned upgrades of plugins at runtime. Provide clear plugin registration/unregistration APIs and lifecycle hooks (onLoad, onUnload, onUpdate). For enterprise, add plugin state persistence, rollback hooks, event notification, and status query API. Document all lifecycle events for international contributors.
+- **中文：** 支援執行期動態載入、卸載、熱重載與版本升級，提供明確的插件註冊/反註冊 API 與生命週期鉤子（onLoad、onUnload、onUpdate）。企業級建議加上插件狀態持久化、回滾鉤子、事件通知與狀態查詢 API，並為國際協作詳細記錄所有生命週期事件。
+
+**Best Practices | 最佳實踐**
+- EN: Always emit lifecycle events (loaded, unloaded, updated, rolled back) for observability and debugging.
+- 中文：所有生命週期事件（載入、卸載、升級、回滾）應發出事件通知，便於監控與除錯。
+- EN: Persist plugin state (config, version, health) for rollback and audit.
+- 中文：插件狀態（設定、版本、健康）應持久化，方便回滾與稽核。
+- EN: Provide a status query API for plugin health and version.
+- 中文：建議提供插件健康與版本查詢 API。
+
+**Common Pitfalls | 常見錯誤**
+- EN: Forgetting to unregister or clean up resources on unload can cause memory leaks.
+- 中文：卸載時未釋放資源會導致記憶體洩漏。
+- EN: Not handling version downgrade/rollback gracefully may break plugin state.
+- 中文：未妥善處理版本回滾，可能導致插件狀態錯亂。
+
+```typescript
+// Example: Plugin lifecycle hooks with rollback, event, and status API
+export interface Plugin {
+  onLoad?(): void;
+  onUnload?(): void;
+  onUpdate?(oldVersion: string, newVersion: string): void;
+  onRollback?(fromVersion: string, toVersion: string): void; // 進階：支援回滾
+  onEvent?(event: 'loaded'|'unloaded'|'updated'|'rolledback', meta?: any): void; // 事件通知
+  getStatus?(): { version: string; health: boolean; config?: any }; // 狀態查詢 API
+}
+```
+
+---
+
+##### 2. Plugin Dependency & Version Management | 插件依賴與版本管理
+
+- **EN:** Use peerDependencies, semantic versioning, and dependency graph checks. Warn or block incompatible plugins at load time. Document required/optional dependencies in plugin manifest. For large-scale, use automated dependency audit and compatibility test scripts.
+- **中文：** 使用 peerDependencies、語意化版本與依賴圖檢查，載入時警告或阻擋不相容插件，並於插件描述檔明確標註必需/可選依賴。大規模協作建議自動化依賴稽核與相容性測試腳本。
+
+```json
+{
+  "name": "@junai-key/formatter-slack",
+  "peerDependencies": {
+    "junai-key-core": ">=1.0.0",
+    "i18next": ">=23.0.0"
+  },
+  "optionalDependencies": {
+    "@junai-key/formatter-markdown": ">=1.0.0"
+  },
+  "compatibleApiVersions": ["v1", "v2"]
+}
+```
+
+##### 3. Cross-Platform Plugin Template | 跨平台插件範本
+
+- **EN:** Provide a TypeScript/ESM template with strict interface, i18n, and test stubs. Encourage use of abstract base classes for common logic. Include i18n fallback and health check stub.
+- **中文：** 提供 TypeScript/ESM 範本，嚴格型別、國際化與測試範例，建議共用邏輯抽象基底類別，並內建 i18n fallback 與健康檢查範本。
+
+```typescript
+// Example: Abstract base class for formatters with i18n fallback & health check
+export abstract class BaseFormatter {
+  abstract format(data: OutputData): string;
+  protected t(key: string, options?: any) {
+    // i18n helper with fallback
+    return i18n.t(key, { ...options, fallbackLng: 'en' });
+  }
+  healthCheck?(): boolean | Promise<boolean> {
+    // 健康檢查預設實作
+    return true;
+  }
+}
+```
+
+##### 4. Plugin Testing & CI/CD | 插件測試與持續整合
+
+- **EN:** Require 100% test coverage for all plugin logic. Integrate static analysis (ESLint, TypeScript), security scan, and test reporting in CI/CD. Provide test fixtures and mocks for plugin APIs. Add plugin compatibility and security audit steps in pipeline.
+- **中文：** 強制所有插件邏輯 100% 測試覆蓋率，CI/CD 整合靜態分析、型別檢查、安全掃描與測試報告，並提供 API 測試樣板與 mock。建議於 CI/CD 加入插件相容性與安全稽核步驟。
+
+```yaml
+# Example: CI/CD plugin audit step (GitHub Actions)
+- name: Plugin Compatibility & Security Audit
+  run: |
+    npm run test:plugins
+    npm run audit:plugins
+```
+
+##### 5. Plugin Internationalization (i18n) | 插件國際化
+
+- **EN:** All user-facing strings must use i18n libraries (e.g., i18next) and support runtime language switching. Document supported locales in plugin manifest. Implement fallback and runtime locale detection.
+- **中文：** 所有對用戶顯示字串必須用 i18n 函式庫，支援執行期語言切換，並於描述檔標註支援語系。建議實作 fallback 與執行期語言偵測。
+
+```typescript
+// Example: i18n runtime detection and fallback
+import i18n from 'i18next';
+const userLang = detectUserLang() || 'en';
+i18n.changeLanguage(userLang);
+// ...
+```
+
+##### 6. TypeScript Utility Types for Plugins | 插件型別工具
+
+- **EN:** Use advanced utility types (Partial, Required, Omit, ReturnType, Extract) and type guards for robust plugin contracts. Provide type-safe plugin registry and auto-completion. For large plugin ecosystems, use type-level API compatibility checks.
+- **中文：** 善用進階工具型別與 type guard，確保插件合約健壯，並提供型別安全的註冊表與自動補全。大規模插件生態建議型別層級 API 相容性檢查。
+
+```typescript
+// Example: Type-safe plugin registry with API version check
+type PluginApiVersion = 'v1' | 'v2';
+interface PluginMeta {
+  apiVersion: PluginApiVersion;
+  name: string;
+}
+const registry: Record<string, { meta: PluginMeta; plugin: OutputFormatter }> = {};
+function registerFormatter(meta: PluginMeta, formatter: OutputFormatter) {
+  if (!['v1', 'v2'].includes(meta.apiVersion)) throw new Error('Incompatible API version');
+  registry[meta.name] = { meta, plugin: formatter };
+}
+```
+
+##### 7. Plugin Security & Sandbox Best Practices | 插件安全與沙箱最佳實踐
+
+- **EN:** Always validate, sandbox, and restrict third-party plugins. Use process isolation, permission control, input/output validation, and audit logging. Document security model in plugin README. For advanced use, implement multi-level permission and automated audit tools.
+- **中文：** 第三方插件必須驗證、沙箱隔離、權限控管、輸入/輸出驗證與稽核日誌，並於 README 詳述安全模型。進階建議多層級權限與自動化安全稽核工具。
+
+```typescript
+// Example: Run plugin in a Node.js worker thread with permission config
+import { Worker } from 'worker_threads';
+function runPluginIsolated(pluginPath: string, input: any, permissions: string[]) {
+  return new Promise((resolve, reject) => {
+    const worker = new Worker(pluginPath, { workerData: { input, permissions } });
+    worker.on('message', resolve);
+    worker.on('error', reject);
+    worker.on('exit', (code) => {
+      if (code !== 0) reject(new Error(`Worker stopped with exit code ${code}`));
+    });
+  });
+}
+```
+
+##### 8. Plugin Documentation & Contribution Guide | 插件文件與貢獻指引
+
+- **EN:** Each plugin must include a bilingual README (usage, API, i18n, test, version, security, changelog) and follow a clear, versioned contribution guide. Use badges for coverage, build, and security status. Add metadata for auto-doc generation.
+- **中文：** 每個插件需附中英雙語 README（用法、API、國際化、測試、版本、安全、變更紀錄），並遵循明確版本化貢獻規範，建議加上覆蓋率、建置、安全徽章。進階建議補充元數據以利自動化文檔生成。
+
+```markdown
+# Slack Formatter Plugin
+
+[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)]()
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)]()
+[![Security](https://img.shields.io/badge/security-passing-brightgreen)]()
+
+## Usage
+...
+## API
+...
+## i18n
+...
+## Test
+...
+## Version
+...
+## Security Notes
+...
+## Changelog
+...
+## Metadata
+- compatibleApiVersions: v1, v2
+- locales: en, zh-TW, ja
+```
+
+##### 9. Plugin Performance & Observability | 插件效能與可觀測性
+
+- **EN:** Monitor plugin execution time, memory, errors, and resource usage. Integrate with centralized logging, metrics, and tracing. Provide hooks for health checks and self-reporting. For advanced use, add plugin self-healing and anomaly alerting.
+- **中文：** 監控插件執行時間、記憶體、錯誤與資源用量，整合集中日誌、指標與追蹤，並提供健康檢查與自我回報鉤子。進階建議插件自我修復與異常警示。
+
+```typescript
+// Example: Plugin execution timing, health check, and anomaly alert
+const start = Date.now();
+try {
+  plugin.run(...args);
+  if (plugin.healthCheck && !plugin.healthCheck()) {
+    alert('Plugin health check failed!');
+  }
+} catch (e) {
+  logError(e);
+  // trigger anomaly alert
+} finally {
+  const duration = Date.now() - start;
+  console.log(`[Plugin] Execution time: ${duration}ms`);
+}
+```
+
+##### 10. Plugin Review & Publishing Workflow | 插件審核與發佈流程
+
+- **EN:** All plugins must pass automated lint, type, test, security, and compatibility checks before publishing. Use a review checklist and automated scripts for audit. Support staged publishing (alpha/beta/stable) and rollback.
+- **中文：** 所有插件需通過自動化 lint、型別、測試、安全與相容性檢查，並經審核清單與自動化腳本稽核。支援分階段發佈（alpha/beta/stable）與回滾。
+
+```yaml
+# Example: Plugin review checklist (excerpt)
+- [ ] Lint/Type/Test/Security/Audit passed
+- [ ] API compatibility verified
+- [ ] i18n/locale coverage
+- [ ] Metadata/README complete
+- [ ] Health check implemented
+```
+
+##### 11. Plugin Security Audit & Automation | 插件安全審計與自動化工具
+
+- **EN:** Integrate automated security scanners (e.g., npm audit, snyk), permission diff tools, and audit log analyzers in CI/CD. Document all audit results and remediation steps.
+- **中文：** CI/CD 整合自動化安全掃描（如 npm audit、snyk）、權限差異工具與稽核日誌分析，並記錄所有稽核結果與修正步驟。
+
+##### 12. International Collaboration & Community Patterns | 國際社群協作模式
+
+- **EN:** Use bilingual docs, code comments, and issue templates. Encourage async review, timezone-friendly meetings, and clear code ownership. Document all extension points and review processes for global contributors.
+- **中文：** 採用雙語文件、註解與 issue 模板，鼓勵非同步審查、時區友善會議與明確代碼責任歸屬。所有擴展點與審查流程需有文件，方便全球貢獻者參与。
+
+##### 13. Plugin Metadata & Auto-Documentation | 插件元數據與自動化文檔生成
+
+- **EN:** Each plugin should provide structured metadata (name, version, author, compatibleApiVersions, locales, permissions, healthCheck, etc.) for auto-generating documentation and registry listings.
+- **中文：** 每個插件應提供結構化元數據（名稱、版本、作者、API 相容性、語系、權限、健康檢查等），以利自動生成文檔與註冊表。
+
+```json
+// Example: plugin metadata
+{
+  "name": "@junai-key/formatter-slack",
+  "version": "1.2.3",
+  "author": "junai-key collective",
+  "compatibleApiVersions": ["v1", "v2"],
+  "locales": ["en", "zh-TW", "ja"],
+  "permissions": ["read", "write"],
+  "healthCheck": true
+}
+```
+
+##### 14. Plugin API Compatibility Testing | 插件 API 兼容性測試
+
+- **EN:** Provide automated tests to verify plugin compatibility with all supported API versions. Use test matrix for multi-version coverage.
+- **中文：** 提供自動化測試，驗證插件對所有支援 API 版本的相容性，建議用測試矩陣覆蓋多版本。
+
+```yaml
+# Example: Test matrix for plugin API versions
+strategy:
+  matrix:
+    api-version: [v1, v2]
+steps:
+  - run: npm run test:plugin -- --api-version ${{ matrix.api-version }}
+```
+
+##### 15. Plugin Automated Health Check | 插件自動化健康檢查
+
+- **EN:** All plugins should expose a health check API or method for runtime monitoring and self-healing.
+- **中文：** 所有插件應暴露健康檢查 API 或方法，便於執行期監控與自我修復。
+
+```typescript
+// Example: Plugin health check API
+export interface Plugin {
+  healthCheck?(): boolean | Promise<boolean>;
+}
+```
+
+---
+
+##### 16. Plugin Upgrade, Migration & Backward Compatibility | 插件升級、遷移與向下相容
+
+- **EN:** Design plugins to support seamless upgrades and migrations. Provide migration scripts or hooks for state/data transformation. Always document breaking changes and offer backward compatibility layers when possible. Use feature flags or versioned APIs to avoid disruption.
+- **中文：** 插件設計需支援無縫升級與遷移，提供狀態/資料轉換腳本或鉤子，明確記錄破壞性變更，盡量提供向下相容層。建議用功能旗標或版本化 API 避免中斷。
+
+```typescript
+// Example: Plugin migration hook
+export interface Plugin {
+  migrateState?(fromVersion: string, toVersion: string, state: any): any;
+}
+```
+
+##### 17. Plugin Ecosystem Governance & Quality Assurance | 插件生態治理與品質保證
+
+- **EN:** Establish a plugin governance model: code of conduct, review board, quality gates, and deprecation policy. Use automated tools to monitor ecosystem health, detect abandoned/vulnerable plugins, and enforce standards.
+- **中文：** 建立插件治理機制：行為準則、審查委員會、品質門檻與棄用政策。自動化監控生態健康，偵測棄用/有漏洞插件並強制標準。
+
+```yaml
+# Example: Plugin deprecation policy (excerpt)
+deprecation:
+  notify: true
+  gracePeriod: 90d
+  replacement: '@junai-key/formatter-markdown'
+```
+
+##### 18. Plugin Marketplace & Discovery | 插件市集與自動發現
+
+- **EN:** Provide a centralized plugin marketplace/registry with search, rating, and auto-update. Support plugin discovery via manifest metadata and auto-registration. Document submission/review/publishing process for contributors.
+- **中文：** 提供集中式插件市集/註冊表，支援搜尋、評分、自動更新。支援透過描述檔元數據自動發現與註冊，並有明確的提交/審查/發佈流程文件。
+
+```json
+// Example: plugin registry entry
+{
+  "name": "@junai-key/formatter-slack",
+  "description": "Slack output formatter for JunAI Key",
+  "version": "1.2.3",
+  "author": "junai-key collective",
+  "rating": 4.9,
+  "downloads": 1200,
+  "lastUpdated": "2025-06-10"
+}
+```
+
+##### 19. Plugin Interoperability & Cross-Plugin Communication | 插件互通與跨插件通訊
+
+- **EN:** Enable plugins to communicate via well-defined events, shared services, or message bus. Document safe communication patterns and avoid tight coupling. For advanced use, support plugin-to-plugin API contracts and event schemas.
+- **中文：** 支援插件間透過事件、共用服務或訊息匯流排通訊，並記錄安全通訊模式，避免緊耦合。進階可支援插件 API 合約與事件結構。
+
+```typescript
+// Example: Plugin event bus for cross-plugin communication
+export interface PluginEventBus {
+  emit(event: string, payload: any): void;
+  on(event: string, handler: (payload: any) => void): void;
+}
+```
+
+##### 20. Plugin Analytics, Usage Reporting & Feedback | 插件分析、使用回報與反饋
+
+- **EN:** Collect anonymized plugin usage analytics and error reports (opt-in). Provide feedback channels for users and contributors. Use analytics to guide ecosystem improvements and plugin recommendations.
+- **中文：** 支援匿名化插件使用分析與錯誤回報（需用戶同意），提供用戶與貢獻者反饋管道。建議用分析數據優化生態與推薦插件。
+
+```typescript
+// Example: Plugin usage analytics (opt-in)
+function reportPluginUsage(pluginName: string, event: string) {
+  if (userConsented()) {
+    sendAnalytics({ plugin: pluginName, event, timestamp: Date.now() });
+  }
+}
+```
+
+---
+
+> **持續優化建議**
+> - 定期審查與更新插件開發規範，根據社群與商業需求調整最佳實踐。
+> - 鼓勵社群參與治理、審查與生態建設，推動國際協作。
+> - 強化自動化工具鏈，降低維護與審核成本。
+> - 持續關注安全、相容性、國際化與可觀測性，確保生態永續發展。
+
+---
+
+##### 21. BindAi Integration | BindAi 整合範例
+
+- **EN:** To integrate BindAi, use its REST API or official SDK (if available). Create a TypeScript service or plugin that wraps BindAi calls, handles authentication (API key via .env), error handling, and i18n. Register BindAi as an agent, middleware, or formatter in the plugin system. Document integration steps and provide usage examples for contributors.
+- **中文：** 整合 BindAi 時，建議透過 REST API 或官方 SDK（如有）實作 TypeScript service 或 plugin，包裝 BindAi 調用、API 金鑰（建議用 .env）、錯誤處理與國際化。可將 BindAi 註冊為 agent、middleware 或 formatter，並於插件系統註冊。請詳細記錄整合步驟與範例，方便貢獻者參考。
+
+```typescript
+// Example: BindAi service integration (REST API)
+import axios from 'axios';
+
+export class BindAiService {
+  constructor(private apiKey: string) {}
+
+  async callBindAi(input: string): Promise<string> {
+    try {
+      const response = await axios.post('https://api.bindai.com/v1/endpoint', {
+        input,
+      }, {
+        headers: { 'Authorization': `Bearer ${this.apiKey}` }
+      });
+      return response.data.result;
+    } catch (error) {
+      // i18n error handling
+      throw new Error('BindAi API error: ' + (error as any).message);
+    }
+  }
+}
+
+// Example: Register BindAi as an agent plugin
+import { AgentRegistry } from './agent-registry';
+AgentRegistry.register('bindai', new BindAiService(process.env.BINDAI_API_KEY!));
+```
+
+- **Best Practice:**
+  - Store API keys in `.env` and never hardcode.
+  - Provide i18n error messages.
+  - Document all integration steps and usage in README.
+  - Support plugin hot-reload and health check if possible.
+
+---
+
+**version**: 1.2.0-advanced
+**last updated**: 2025-06-15
 © 2025 junai-key collective. the sanctum of knowledge never closes.

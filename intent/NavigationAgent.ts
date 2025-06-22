@@ -3,6 +3,7 @@
  * 根據任務與記憶自動規劃與執行多步驟任務。
  */
 import { MemoryPalace, Context } from '../knowledge/MemoryPalace'
+import { BindAiAgent } from '../integration/bindai.agent'
 
 // 型別定義
 export interface Task {
@@ -39,8 +40,16 @@ export class NavigationAgent {
 
     for (const step of plan.steps) {
       const agent = AgentFactory.getAgent(step.skillType)
-      const result = await agent.execute(step.parameters)
-      await this.memory.storeExecution(step, result)
+      if (step.skillType === 'bindai') {
+        const prompt = typeof step.parameters.prompt === 'string' ? step.parameters.prompt : String(step.parameters.query || task.description)
+        const result = await agent.execute({ prompt })
+        await this.memory.storeExecution(step, result)
+      } else {
+        // 其他 agent 統一傳入 { prompt } 結構，避免型別錯誤
+        const prompt = typeof step.parameters.prompt === 'string' ? step.parameters.prompt : String(step.parameters.query || task.description)
+        const result = await agent.execute({ prompt })
+        await this.memory.storeExecution(step, result)
+      }
     }
 
     return plan.compileFinalResult()
@@ -64,15 +73,20 @@ export class NavigationAgent {
 
   private getAvailableSkills(): string[] {
     // TODO: 回傳可用技能列表
-    return ['search', 'summarize', 'executeScript']
+    return ['search', 'summarize', 'executeScript', 'bindai'] // 新增 bindai
   }
 }
 
-// 假設的外部依賴（需實作或引入）
+// AgentFactory 擴充註冊 bindai agent
 export const AgentFactory = {
-  getAgent: (skillType: string) => ({
-    execute: async (_params: Record<string, unknown>) => ({ output: `Executed ${skillType}` })
-  })
+  getAgent: (skillType: string) => {
+    if (skillType === 'bindai') {
+      return new BindAiAgent(process.env.BINDAI_API_KEY, 'zh-tw')
+    }
+    return {
+      execute: async (_params: { prompt: string }) => ({ output: `Executed ${skillType}` }) // 移除未使用警告
+    }
+  }
 }
 
 export const LLMClient = {
