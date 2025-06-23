@@ -1,0 +1,40 @@
+{
+  "name": "jun-ai-key",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "cli": "tsx src/cli/main.ts"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@supabase/supabase-js": "^2.43.4",
+    "dotenv": "^16.4.5",
+    "axios": "^1.7.2",
+    "tsx": "^4.11.0",
+    "react-router-dom": "^6.23.1",
+    "commander": "^12.1.0",
+    "readline": "^1.3.0",
+    "lucide-react": "^0.395.0",
+    "react-markdown": "^9.0.1"
+    // Add other dependencies as needed later (e.g., levelup, crdt libraries)
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^3.1.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.2.0",
+    "@types/node": "^20.14.2",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/readline": "^1.3.0",
+    "tailwindcss": "^3.4.4",
+    "postcss": "^8.4.38",
+    "autoprefixer": "^10.4.19",
+    "@tailwindcss/typography": "^0.5.13"
+  }
+}

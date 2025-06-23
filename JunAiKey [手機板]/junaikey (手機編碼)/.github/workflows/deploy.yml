@@ -1,0 +1,62 @@
+# .github/workflows/deploy.yml
+name: Supabase Auto-Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Or your preferred Node.js version
+
+      - name: Install dependencies
+        run: npm ci # Use npm ci for clean install in CI environments
+
+      # Optional: Run tests before deploying
+      # - name: Run tests
+      #   run: npm test
+
+      - name: Install Supabase CLI
+        run: npm install -g supabase-cli # Use the official package name
+
+      - name: Link Supabase Project
+        run: supabase link --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+      - name: Deploy Supabase Migrations
+        run: supabase db push # Applies pending migrations
+
+      - name: Deploy Supabase Edge Functions
+        # Assumes your functions are in the 'supabase/functions' directory
+        run: supabase functions deploy --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          # Pass environment variables to Edge Functions if needed
+          # These secrets must be added to your Supabase project settings under Functions -> Secrets
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          LITELLM_API_ENDPOINT: ${{ secrets.LITELLM_API_ENDPOINT }}
+          LITELLM_MODEL: ${{ secrets.LITELLM_MODEL }} # Optional
+          BOOST_SPACE_WEBHOOK_URL: ${{ secrets.BOOST_SPACE_WEBHOOK_URL }} # Optional
+          BOOST_SPACE_API_KEY: ${{ secrets.BOOST_SPACE_API_KEY }} # Optional
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} # Optional, if LiteLLM needs it
+
+      # Optional: Deploy Frontend to GitHub Pages
+      # - name: Deploy Frontend
+      #   if: github.ref == 'refs/heads/main' # Deploy only on main branch pushes
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./dist # Directory where Vite builds the app
